@@ -1,13 +1,13 @@
-package sistemarestaurante.logica;
+package modelo;
 
 import java.util.ArrayList;
 
-public class Categoria {
+public class UnidadProcesadora {
 
     private String nombre;
-    private ArrayList<Item> items = new ArrayList();
+    private ArrayList<Gestor> gestores = new ArrayList();
 
-    public Categoria(String nombre) {
+    public UnidadProcesadora(String nombre) {
         this.nombre = nombre;
     }
 
@@ -19,7 +19,7 @@ public class Categoria {
         this.nombre = nombre;
     }
 
-    public ArrayList<Item> getItems() {
-        return items;
+    public ArrayList<Gestor> getGestores() {
+        return gestores;
     }
 }

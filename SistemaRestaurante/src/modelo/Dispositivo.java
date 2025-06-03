@@ -1,12 +1,14 @@
-package sistemarestaurante.logica;
+package modelo;
 
 public class Dispositivo {
+    private static int contadorId = 0;
     private int id;
     private Cliente cliente;
     private EstadoDispositivo estado;
+    private Servicio servicio;
 
-    public Dispositivo(int id, Cliente cliente) {
-        this.id = id;
+    public Dispositivo(Cliente cliente) {
+        this.id  = ++ contadorId;
         this.cliente = cliente;
     }
 
@@ -25,6 +27,8 @@ public class Dispositivo {
     public EstadoDispositivo getEstado() {
         return estado;
     }
+
+    public void setServicio(Servicio servicio){ this.servicio = servicio;}
 
     public void setEstado(EstadoDispositivo estado) {
         this.estado = estado;

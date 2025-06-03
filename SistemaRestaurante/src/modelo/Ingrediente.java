@@ -1,4 +1,4 @@
-package sistemarestaurante.logica;
+package modelo;
 
 public class Ingrediente {
 

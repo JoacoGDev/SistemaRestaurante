@@ -1,4 +1,4 @@
-package sistemarestaurante.logica;
+package modelo;
 
 import java.util.ArrayList;
 
