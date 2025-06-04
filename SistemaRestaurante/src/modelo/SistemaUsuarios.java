@@ -29,7 +29,7 @@ public class SistemaUsuarios {
             //Revisar esta pavada
             //Fachada.getInstancia().avisar(Fachada.eventos.cambioListaSesiones);
         }
-
+          return null; // para sacar el error
     }
     
     private Cliente buscarCliente(int numeroCliente, String password){
