@@ -11,6 +11,7 @@ package modelo;
 public class Fachada {
     
     private SistemaUsuarios sUsuario = new SistemaUsuarios();
+    private SistemaMenu sMenu = new SistemaMenu();
     
     private static Fachada instancia = new Fachada();
 
@@ -21,12 +22,16 @@ public class Fachada {
     private Fachada() {
     }
     
-        public void agregarCliente(int numeroCliente,String nombreUsuario, String password, String nombreCompleto, TipoCliente tipoCliente) {
+        public void agregarCliente(int numeroCliente,String nombreUsuario, String password, String nombreCompleto, TipoCliente tipoCliente) throws RestauranteException{
             sUsuario.agregarCliente(numeroCliente, nombreUsuario, password, nombreCompleto, tipoCliente);
         }
 
-        public Cliente loginCliente(int numeroCliente, String password){
+        public Cliente loginCliente(int numeroCliente, String password)throws RestauranteException{
             return sUsuario.loginCliente(numeroCliente, password);
+        }
+        
+        public Menu getMenu(){
+            return sMenu.getMenuActual();
         }
     }
     

@@ -13,17 +13,17 @@ public class SistemaUsuarios {
     public ArrayList<Gestor> gestores = new ArrayList();
 
 
-    public void agregarCliente(int numeroCliente, String nombreUsuario, String password, String nombreCompleto, TipoCliente tipoCliente) {
+    public void agregarCliente(int numeroCliente, String nombreUsuario, String password, String nombreCompleto, TipoCliente tipoCliente) throws RestauranteException {
       Cliente nuevoCliente = new Cliente(numeroCliente,tipoCliente,nombreCompleto,password);
       clientes.add(nuevoCliente);
    
     }
     
-    public Cliente loginCliente(int numeroCliente, String password){
+    public Cliente loginCliente(int numeroCliente, String password)throws RestauranteException{
 
-         Cliente usuarioCliente = (Cliente)buscarCliente(numeroCliente, password);
+         Cliente usuarioCliente = buscarCliente(numeroCliente, password);
          //TIENE QUE HABER UNA EXCEPCIÓN
-          if(usuarioCliente!=null){
+          if(usuarioCliente != null){
               Dispositivo dispositivo = new Dispositivo(usuarioCliente);
               usuarioCliente.setDispositivo(dispositivo);
             //Revisar esta pavada

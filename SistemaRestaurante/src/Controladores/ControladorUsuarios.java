@@ -6,6 +6,8 @@ import modelo.Fachada;
 
 import java.security.PrivateKey;
 import modelo.Cliente;
+import modelo.Menu;
+import modelo.RestauranteException;
 
 public class ControladorUsuarios {
 
@@ -18,15 +20,30 @@ public class ControladorUsuarios {
     }
 
     public void loginUsuario(int numeroCliente, String password){
+        try{
+            Cliente clienteLogueado = fachada.loginCliente(numeroCliente, password);
+         
+        }catch(RestauranteException ex){
+            
+        }
+    }
+    
+    public void cargar(Cliente cli){
+        actualizarNombre();
+        cargarMenu();
+        
+    }
+    
+    private void actualizarNombre() {
+        
+    }
 
-         Cliente clienteLogueado = fachada.loginCliente(numeroCliente, password);
-         if(clienteLogueado != null){
-             
-         }
+    private void cargarMenu() {
+        cargarCategorias();
     }
     
     public void cargarCategorias(){
-        
+        fachada.getMenu().getCategorias();
     }
     
     public void cargarItems(){
@@ -48,5 +65,7 @@ public class ControladorUsuarios {
     public void finalizarServicio(){
         
     }
+
+    
 
 }
