@@ -4,17 +4,22 @@
  */
 package Vistas;
 
+import Controladores.ControladorUsuarios;
+import Controladores.IVistaUsuario;
+
 /**
  *
  * @author joaco
  */
-public class VistaUsuario extends javax.swing.JFrame {
+public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
-    /**
-     * Creates new form VistaUsuario
-     */
+    ControladorUsuarios cUsuario;
+    
     public VistaUsuario() {
         initComponents();
+        this.cUsuario = new ControladorUsuarios(this);
+        
+        
     }
 
     /**
@@ -267,18 +272,17 @@ public class VistaUsuario extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
@@ -289,9 +293,11 @@ public class VistaUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_bAgregarPedidoActionPerformed
 
     private void bLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLoginActionPerformed
-        String nombre = tfNombreUsuario.getText();
+        //NO SE SI ESTA BIEN O TENDRIAMOS QUE DIRECTAMENTE TOMAR UN INT
+        String tfNum = tfNombreUsuario.getText();
+        int numU = Integer.parseInt(tfNum);
         String pass = new String(tfContrasena.getPassword());
-        
+        cUsuario.loginUsuario(numU, pass);
     }//GEN-LAST:event_bLoginActionPerformed
 
 
@@ -321,4 +327,9 @@ public class VistaUsuario extends javax.swing.JFrame {
     private javax.swing.JPasswordField tfContrasena;
     private javax.swing.JTextField tfNombreUsuario;
     // End of variables declaration//GEN-END:variables
+
+    @Override
+    public void MostrarUsuario(String nombre) {
+        setTitle("Usuario:" + nombre);
+    }
 }

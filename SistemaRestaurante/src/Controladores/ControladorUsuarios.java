@@ -13,15 +13,17 @@ public class ControladorUsuarios {
 
     //private VistaUsuario vistaLogin;
     private Fachada fachada = Fachada.getInstancia();
+    private IVistaUsuario vUsuario;
 
 
-    public ControladorUsuarios(VistaUsuario vistaUsuario){
-        vistaUsuario = vistaUsuario;
+    public ControladorUsuarios(IVistaUsuario vistaUsuario){
+        vUsuario = vistaUsuario;
     }
 
     public void loginUsuario(int numeroCliente, String password){
         try{
             Cliente clienteLogueado = fachada.loginCliente(numeroCliente, password);
+            vUsuario.MostrarUsuario(clienteLogueado.getNombreCompleto());
          
         }catch(RestauranteException ex){
             

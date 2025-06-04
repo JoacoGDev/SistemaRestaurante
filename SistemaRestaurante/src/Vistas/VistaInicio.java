@@ -70,13 +70,13 @@ public class VistaInicio extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bClienteActionPerformed
-        VistaGestor vg = new VistaGestor();
-        vg.setVisible(true);
+        VistaUsuario vu = new VistaUsuario();
+        vu.setVisible(true);
     }//GEN-LAST:event_bClienteActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        VistaUsuario vu = new VistaUsuario();
-        vu.setVisible(true);
+        VistaGestor vg = new VistaGestor();
+        vg.setVisible(true);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     

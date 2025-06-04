@@ -4,11 +4,13 @@
  */
 package Vistas;
 
+import Controladores.IVistaGestor;
+
 /**
  *
  * @author joaco
  */
-public class VistaGestor extends javax.swing.JFrame {
+public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
 
     /**
      * Creates new form VistaGestor

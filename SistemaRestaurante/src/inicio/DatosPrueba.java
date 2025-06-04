@@ -4,13 +4,25 @@
  */
 package inicio;
 
+import modelo.Fachada;
+import modelo.RestauranteException;
+import modelo.TipoCliente;
+
 /**
  *
  * @author joaco
  */
 public class DatosPrueba {
     
-    public void cargar(){
+    public static void cargar(){
         
+        Fachada f = Fachada.getInstancia();
+        try{
+            f.agregarCliente(323, "Juan", "Juan", "Juan Paco Pedro De La Mar", TipoCliente.COMUNES);
+        
+        }
+        catch(RestauranteException ex){
+            
+        }
     }
 }

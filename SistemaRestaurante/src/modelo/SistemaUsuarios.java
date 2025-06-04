@@ -28,6 +28,7 @@ public class SistemaUsuarios {
               usuarioCliente.setDispositivo(dispositivo);
             //Revisar esta pavada
             //Fachada.getInstancia().avisar(Fachada.eventos.cambioListaSesiones);
+            return usuarioCliente;
         }
           return null; // para sacar el error
     }
