@@ -4,6 +4,9 @@
  */
 package Controladores;
 
+import java.util.ArrayList;
+import modelo.Categoria;
+
 /**
  *
  * @author joaco
@@ -13,5 +16,7 @@ public interface IVistaUsuario {
     public void MostrarUsuario(String nombreUsuario);
 
     public void mostrarMensaje(String message);
+    
+    public void cargarCategorias(ArrayList<Categoria> categorias);
     
 }

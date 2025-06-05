@@ -24,6 +24,7 @@ public class ControladorUsuarios {
         try{
             Cliente clienteLogueado = fachada.loginCliente(numeroCliente, password);
             vUsuario.MostrarUsuario(clienteLogueado.getNombreCompleto());
+            vUsuario.mostrarMensaje("Mensajes de Sistema");
          
         }catch(RestauranteException ex){
            vUsuario.mostrarMensaje(ex.getMessage());

@@ -14,10 +14,17 @@ public class SistemaUsuarios {
 
 
     public void agregarCliente(int numeroCliente, String nombreUsuario, String password, String nombreCompleto, TipoCliente tipoCliente) throws RestauranteException {
-      Cliente nuevoCliente = new Cliente(numeroCliente,tipoCliente,nombreCompleto,password);
-      clientes.add(nuevoCliente);
-   
+        // Verificamos si el número de cliente ya existe
+        for (Cliente c : clientes) {
+            if (c.getNumeroCliente() == numeroCliente) {
+                throw new RestauranteException("El número de cliente ya está registrado");
+            }
+        }
+    
+        Cliente nuevoCliente = new Cliente(numeroCliente, tipoCliente, nombreCompleto, password);
+        clientes.add(nuevoCliente);
     }
+
     
     public Cliente loginCliente(int numeroCliente, String password)throws RestauranteException{
 
