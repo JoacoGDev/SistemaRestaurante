@@ -11,5 +11,7 @@ package Controladores;
 public interface IVistaUsuario {
     
     public void MostrarUsuario(String nombreUsuario);
+
+    public void mostrarMensaje(String message);
     
 }

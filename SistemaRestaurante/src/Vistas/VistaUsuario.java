@@ -6,6 +6,7 @@ package Vistas;
 
 import Controladores.ControladorUsuarios;
 import Controladores.IVistaUsuario;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -330,6 +331,12 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
     @Override
     public void MostrarUsuario(String nombre) {
-        setTitle("Binevenido " + nombre);
+        setTitle("Bienvenido a PolloMorfismo " + nombre);
     }
+    
+    @Override
+    public void mostrarMensaje(String mensaje) {
+       JOptionPane.showMessageDialog(null, mensaje);
+    }
+            
 }

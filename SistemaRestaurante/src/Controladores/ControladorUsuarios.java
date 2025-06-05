@@ -26,7 +26,7 @@ public class ControladorUsuarios {
             vUsuario.MostrarUsuario(clienteLogueado.getNombreCompleto());
          
         }catch(RestauranteException ex){
-            
+           vUsuario.mostrarMensaje(ex.getMessage());
         }
     }
     

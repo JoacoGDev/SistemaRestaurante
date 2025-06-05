@@ -21,22 +21,31 @@ public class SistemaUsuarios {
     
     public Cliente loginCliente(int numeroCliente, String password)throws RestauranteException{
 
-         Cliente usuarioCliente = buscarCliente(numeroCliente, password);
-         //TIENE QUE HABER UNA EXCEPCIÓN
-          if(usuarioCliente != null){
-              Dispositivo dispositivo = new Dispositivo(usuarioCliente);
-              usuarioCliente.setDispositivo(dispositivo);
-            //Revisar esta pavada
-            //Fachada.getInstancia().avisar(Fachada.eventos.cambioListaSesiones);
-            return usuarioCliente;
+         Cliente usuarioCliente = buscarCliente(numeroCliente);
+         
+        //Verifica si el cliente no existe o la contraseña está mal
+        if (usuarioCliente == null || !usuarioCliente.getPassword().equals(password)) {
+            throw new RestauranteException("Credenciales incorrectas");
         }
-          return null; // para sacar el error
+         
+         //Verifica que el usuario no esté logueado
+          if (usuarioCliente.getDispositivo() != null) {
+            throw new RestauranteException("El usuario ya se encuentra identificado en otro dispositivo");
+          }
+         
+          //Se loguea el usuario, osea se asigna un dispositivo
+          Dispositivo dispositivo = new Dispositivo(usuarioCliente);
+          dispositivo.setServicio(new Servicio());
+          usuarioCliente.setDispositivo(dispositivo);
+
+          return usuarioCliente;
+
     }
     
-    private Cliente buscarCliente(int numeroCliente, String password){
+    private Cliente buscarCliente(int numeroCliente){
 
         for(Cliente c: clientes){
-            if(c.getNumeroCliente() == numeroCliente && c.getPassword().equals(password)){
+            if(c.getNumeroCliente() == numeroCliente){
                 return c;
             }
         }

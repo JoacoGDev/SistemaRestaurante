@@ -29,4 +29,8 @@ public class Cliente extends Usuario {
     public void setTipoCliente(TipoCliente tipoCliente) {
         this.tipoCliente = tipoCliente;
     }
+    
+    public Dispositivo getDispositivo(){
+        return dispositivo;
+    }
 }
