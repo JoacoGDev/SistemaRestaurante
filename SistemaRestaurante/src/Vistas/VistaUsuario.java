@@ -330,6 +330,6 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
     @Override
     public void MostrarUsuario(String nombre) {
-        setTitle("Usuario:" + nombre);
+        setTitle("Binevenido " + nombre);
     }
 }
