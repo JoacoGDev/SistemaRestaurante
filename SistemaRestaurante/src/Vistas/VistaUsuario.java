@@ -9,6 +9,7 @@ import Controladores.IVistaUsuario;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.Categoria;
+import modelo.Item;
 
 /**
  *
@@ -43,10 +44,10 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
         jPanel2 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        ListaCategorias = new javax.swing.JList<>();
+        ListaCategorias = new javax.swing.JList();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jList2 = new javax.swing.JList<>();
+        listaItems = new javax.swing.JList();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
@@ -109,10 +110,10 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Categorías"));
 
-        ListaCategorias.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        ListaCategorias.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                ListaCategoriasValueChanged(evt);
+            }
         });
         jScrollPane1.setViewportView(ListaCategorias);
 
@@ -134,12 +135,7 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
         jLabel3.setText("Ítems");
 
-        jList2.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
-        });
-        jScrollPane2.setViewportView(jList2);
+        jScrollPane2.setViewportView(listaItems);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Comentario"));
 
@@ -311,12 +307,21 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
         int numU = Integer.parseInt(tfNum);
         String pass = new String(tfContrasena.getPassword());
         cUsuario.loginUsuario(numU, pass);
+        
     }//GEN-LAST:event_bLoginActionPerformed
+
+    private void ListaCategoriasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaCategoriasValueChanged
+        // TODO add your handling code here:
+        if (!evt.getValueIsAdjusting()) {
+            String seleccion = (String) ListaCategorias.getSelectedValue();
+            cUsuario.cargarItems(seleccion);
+        }
+    }//GEN-LAST:event_ListaCategoriasValueChanged
 
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> ListaCategorias;
+    private javax.swing.JList ListaCategorias;
     private javax.swing.JTextPane MensajesSistema;
     private javax.swing.JButton bAgregarPedido;
     private javax.swing.JButton bConfirmarPedidos;
@@ -326,7 +331,6 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -339,6 +343,7 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JList listaItems;
     private javax.swing.JPasswordField tfContrasena;
     private javax.swing.JTextField tfNombreUsuario;
     // End of variables declaration//GEN-END:variables
@@ -360,6 +365,21 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
     @Override
     public void cargarCategorias(ArrayList<Categoria> categorias) {
+        ArrayList<String> listado = new ArrayList();
+        for(Categoria c: categorias){
+            listado.add(c.getNombre());
+        }
+        ListaCategorias.setListData(listado.toArray());
+        
+    }
+    
+    @Override
+    public void cargarItems(ArrayList<Item> is){
+        ArrayList<String> listado = new ArrayList();
+        for(Item i: is){
+            listado.add(i.getNombre());
+        }
+        listaItems.setListData(listado.toArray());
     }
            
     

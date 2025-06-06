@@ -14,6 +14,13 @@ public class Item {
         this.precio = precio;
         this.unidadProcesadora = unidadProcesadora;
     }
+    
+    //TEMPORAL
+    public Item(String nombre, double precio) {
+        this.nombre = nombre;
+        this.precio = precio;
+        this.unidadProcesadora = null;
+    }
 
     public String getNombre() {
         return nombre;

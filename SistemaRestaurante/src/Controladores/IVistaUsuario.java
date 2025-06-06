@@ -6,6 +6,7 @@ package Controladores;
 
 import java.util.ArrayList;
 import modelo.Categoria;
+import modelo.Item;
 
 /**
  *
@@ -18,5 +19,7 @@ public interface IVistaUsuario {
     public void mostrarMensaje(String message);
     
     public void cargarCategorias(ArrayList<Categoria> categorias);
+
+    public void cargarItems(ArrayList<Item> items);
     
 }

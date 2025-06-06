@@ -22,4 +22,17 @@ public class Categoria {
     public ArrayList<Item> getItems() {
         return items;
     }
+    
+    public void agregarItem(Item i){
+        items.add(i);
+    }
+    
+    @Override
+    public boolean equals(Object obj){
+        Categoria c = (Categoria) obj;
+        return nombre.equalsIgnoreCase(c.nombre); 
+    }
+    
+    
+    
 }

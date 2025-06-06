@@ -41,7 +41,12 @@ public class SistemaUsuarios {
           }
          
           //Se loguea el usuario, osea se asigna un dispositivo
-          Dispositivo dispositivo = new Dispositivo(usuarioCliente);
+          Dispositivo dispositivo = new Dispositivo();
+          
+          if (dispositivo.getServicio() != null){
+              throw new RestauranteException("Ya hay un usuario logueado");
+          }
+          
           dispositivo.setServicio(new Servicio());
           usuarioCliente.setDispositivo(dispositivo);
 

@@ -5,14 +5,17 @@ import modelo.Dispositivo;
 import modelo.Fachada;
 
 import java.security.PrivateKey;
+import java.util.ArrayList;
 import modelo.Cliente;
+import modelo.Categoria;
+import modelo.Item;
 import modelo.Menu;
 import modelo.RestauranteException;
 
 public class ControladorUsuarios {
 
     //private VistaUsuario vistaLogin;
-    private Fachada fachada = Fachada.getInstancia();
+    private Fachada f = Fachada.getInstancia();
     private IVistaUsuario vUsuario;
 
 
@@ -22,9 +25,10 @@ public class ControladorUsuarios {
 
     public void loginUsuario(int numeroCliente, String password){
         try{
-            Cliente clienteLogueado = fachada.loginCliente(numeroCliente, password);
+            Cliente clienteLogueado = f.loginCliente(numeroCliente, password);
             vUsuario.MostrarUsuario(clienteLogueado.getNombreCompleto());
             vUsuario.mostrarMensaje("Mensajes de Sistema");
+            cargarCategorias();
          
         }catch(RestauranteException ex){
            vUsuario.mostrarMensaje(ex.getMessage());
@@ -46,11 +50,15 @@ public class ControladorUsuarios {
     }
     
     public void cargarCategorias(){
-        fachada.getMenu().getCategorias();
+        ArrayList<Categoria> categorias = f.getCategoria();
+        vUsuario.cargarCategorias(categorias);
+        
     }
     
-    public void cargarItems(){
-        
+    public void cargarItems(String cat){
+
+        ArrayList<Item> items = f.getItems(cat);
+        vUsuario.cargarItems(items);
     }
     
     public void agregarPedidos(){

@@ -11,6 +11,10 @@ public class Dispositivo {
         this.id  = ++ contadorId;
         this.cliente = cliente;
     }
+    
+    public Dispositivo() {
+        this.id  = ++ contadorId;
+    }
 
     public int getId() {
         return id;
@@ -33,4 +37,10 @@ public class Dispositivo {
     public void setEstado(EstadoDispositivo estado) {
         this.estado = estado;
     }
+
+    public Servicio getServicio() {
+        return servicio;
+    }
+    
+    
 }

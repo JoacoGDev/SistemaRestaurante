@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author joaco
@@ -22,18 +24,38 @@ public class Fachada {
     private Fachada() {
     }
     
-        public void agregarCliente(int numeroCliente,String nombreUsuario, String password, String nombreCompleto, TipoCliente tipoCliente) throws RestauranteException{
-            sUsuario.agregarCliente(numeroCliente, nombreUsuario, password, nombreCompleto, tipoCliente);
-        }
-
-        public Cliente loginCliente(int numeroCliente, String password)throws RestauranteException{
-            return sUsuario.loginCliente(numeroCliente, password);
-        }
-        
-        public Menu getMenu(){
-            return sMenu.getMenuActual();
-        }
+    public void agregarCliente(int numeroCliente, String nombreUsuario, String password, String nombreCompleto, TipoCliente tipoCliente) throws RestauranteException {
+        sUsuario.agregarCliente(numeroCliente, nombreUsuario, password, nombreCompleto, tipoCliente);
     }
+
+    public Cliente loginCliente(int numeroCliente, String password) throws RestauranteException {
+        return sUsuario.loginCliente(numeroCliente, password);
+    }
+
+    public Menu getMenu() {
+        return sMenu.getMenuActual();
+    }
+
+    public ArrayList<Categoria> getCategoria() {
+        return sMenu.getCategoria();
+    }
+
+    public void setMenu(Menu m) {
+        sMenu.setMenuActual(m);
+    }
+
+    public void agregarCategoria(Categoria c) {
+        sMenu.agregarCategoria(c);
+    }
+
+    public void agregarItem(String cat, Item i) {
+        sMenu.agregarItem(cat, i);
+    }
+
+    public ArrayList<Item> getItems(String c) {
+        return sMenu.getItems(c);
+    }
+}
     
 
 
