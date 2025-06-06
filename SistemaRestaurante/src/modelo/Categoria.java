@@ -32,6 +32,11 @@ public class Categoria {
         Categoria c = (Categoria) obj;
         return nombre.equalsIgnoreCase(c.nombre); 
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
     
     
     

@@ -24,6 +24,18 @@ public class SistemaUsuarios {
         Cliente nuevoCliente = new Cliente(numeroCliente, tipoCliente, nombreCompleto, password);
         clientes.add(nuevoCliente);
     }
+    
+       public void agregarGestores(String nombreCompleto, String password, String nombreUsuario) throws RestauranteException {
+        // Verificamos si el número de cliente ya existe
+        for (Gestor g : gestores) {
+            if (g.getUsuario().equals(nombreUsuario)) {
+                throw new RestauranteException("El Gestor ya está registrado");
+            }
+        }
+    
+        Gestor nuevoGestor = new Gestor(nombreCompleto, password, nombreCompleto);
+        gestores.add(nuevoGestor);
+    }
 
     
     public Cliente loginCliente(int numeroCliente, String password)throws RestauranteException{

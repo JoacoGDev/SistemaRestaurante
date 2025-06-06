@@ -3,14 +3,14 @@ package modelo;
 import java.util.ArrayList;
 
 public class Servicio {
-    private ArrayList <Pedidos> pedidos = new ArrayList<>();
+    private ArrayList <Pedido> pedidos = new ArrayList<>();
     private double montoTotal;
 
     public Servicio() {
         montoTotal = 0;
     }
 
-    public ArrayList<Pedidos> getPedidos() {
+    public ArrayList<Pedido> getPedidos() {
         return pedidos;
     }
 

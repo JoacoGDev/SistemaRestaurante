@@ -36,9 +36,8 @@ public class Menu {
         return null;
     }
 
-    public ArrayList<Item> getItem(String c) {
-        Categoria cat = buscarCategoria(c);
-        return cat.getItems();
+    public ArrayList<Item> getItem(Categoria c) {
+        return c.getItems();
     }
     
     

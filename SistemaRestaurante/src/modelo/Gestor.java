@@ -6,12 +6,11 @@ public class Gestor extends Usuario{
     private String nombreUsuario;
     private boolean activo;
 
-    public Gestor(String nombreUsuario, boolean activo, String nombreCompleto, String password) {
+    public Gestor(String nombreUsuario, String nombreCompleto, String password) {
         super(nombreCompleto, password);
         this.nombreUsuario = nombreUsuario;
-        this.activo = activo;
+        activo = false;
     }
-
 
 
 

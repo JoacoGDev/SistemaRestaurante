@@ -32,8 +32,16 @@ public class SistemaMenu {
         return this.menuActual.getCategorias();
     }
     
-    public ArrayList<Item> getItems(String c) {
-        return menuActual.getItem(c);
+    public ArrayList<Item> getItems(Categoria c) {
+        ArrayList<Item> items = menuActual.getItem(c);
+        ArrayList<Item> itemsConStock = new ArrayList<>();
+        
+        for(Item i: items){
+            if(i.isDisponible()){
+                itemsConStock.add(i);
+            }
+        }
+        return itemsConStock;
     }
     
 

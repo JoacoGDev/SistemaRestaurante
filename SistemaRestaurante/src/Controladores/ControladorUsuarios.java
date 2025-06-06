@@ -10,6 +10,7 @@ import modelo.Cliente;
 import modelo.Categoria;
 import modelo.Item;
 import modelo.Menu;
+import modelo.Pedido;
 import modelo.RestauranteException;
 
 public class ControladorUsuarios {
@@ -55,11 +56,13 @@ public class ControladorUsuarios {
         
     }
     
-    public void cargarItems(String cat){
-
+    public void cargarItems(Categoria cat){
+        
         ArrayList<Item> items = f.getItems(cat);
         vUsuario.cargarItems(items);
     }
+    
+
     
     public void agregarPedidos(){
         
@@ -75,6 +78,13 @@ public class ControladorUsuarios {
     
     public void finalizarServicio(){
         
+    }
+
+    public void agregarPedidos(String itemSeleccionado, String comentario) {
+        //itemSeleccionado es un String. Tengo que obtener el objeto item y agregarlo a un pedido
+        //Pedido pedidoAAgregar = new Pedido(itemSeleccionado, comentario);
+        
+        return;
     }
 
     

@@ -25,6 +25,11 @@ public class DatosPrueba {
             f.agregarCliente(232, "Pedro", "pedro", "Pedrito  Pedrón", TipoCliente.DELACASA);
             f.agregarCliente(123, "Andrés", "andres", "Andresitooo", TipoCliente.PREFERENCIALES);
             
+            f.agregarGestores("Juan Carlos", "1", "1");
+            f.agregarGestores("Pedro Pascal", "Pedrito", "PedroPedrin");
+            f.agregarGestores("Carlo", "ElCarli", "Carlangas");
+            f.agregarGestores("Agustin", "Agustin51", "ElFornais");
+            
             f.setMenu(new Menu());
             f.agregarCategoria(new Categoria("Entrada"));
             f.agregarCategoria(new Categoria("Principal"));

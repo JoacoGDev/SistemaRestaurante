@@ -2,20 +2,20 @@ package modelo;
 
 import java.util.ArrayList;
 
-public class Pedidos {
-    private ArrayList<Item> items = new ArrayList<>();
+public class Pedido {
+    private Item item;
     private String comentario;
     private EstadoPedido estado;
     private Gestor gestor;
 
-    public Pedidos(String comentario, EstadoPedido estado, Gestor gestor) {
+    public Pedido(Item item, String comentario) {
+        this.item = item;
         this.comentario = comentario;
-        this.estado = estado;
-        this.gestor = gestor;
+        this.estado = EstadoPedido.NOCONFIRMADO;
     }
 
-    public ArrayList<Item> getItems() {
-        return items;
+    public Item getItems() {
+        return item;
     }
 
     public String getComentario() {

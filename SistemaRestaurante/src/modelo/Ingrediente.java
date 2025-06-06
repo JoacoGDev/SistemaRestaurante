@@ -25,4 +25,8 @@ public class Ingrediente {
     public void setInsumo(Insumo insumo) {
         this.insumo = insumo;
     }
+
+    public boolean isDisponible() {
+        return (insumo.getStock() - cantidad) > insumo.getStockMin();
+    }
 }

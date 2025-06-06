@@ -49,4 +49,18 @@ public class Item {
     public void setUnidadProcesadora(UnidadProcesadora unidadProcesadora) {
         this.unidadProcesadora = unidadProcesadora;
     }
+
+    public boolean isDisponible() {
+        for(Ingrediente i: ingredientes){
+            if(!i.isDisponible()){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
 }

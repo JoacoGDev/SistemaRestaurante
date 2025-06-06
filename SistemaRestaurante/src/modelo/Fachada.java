@@ -27,6 +27,11 @@ public class Fachada {
     public void agregarCliente(int numeroCliente, String nombreUsuario, String password, String nombreCompleto, TipoCliente tipoCliente) throws RestauranteException {
         sUsuario.agregarCliente(numeroCliente, nombreUsuario, password, nombreCompleto, tipoCliente);
     }
+    
+     public void agregarGestores(String nombreCompleto, String password, String nombreUsuario) throws RestauranteException {
+        sUsuario.agregarGestores(nombreCompleto, password, nombreUsuario);
+    }
+     
 
     public Cliente loginCliente(int numeroCliente, String password) throws RestauranteException {
         return sUsuario.loginCliente(numeroCliente, password);
@@ -52,7 +57,7 @@ public class Fachada {
         sMenu.agregarItem(cat, i);
     }
 
-    public ArrayList<Item> getItems(String c) {
+    public ArrayList<Item> getItems(Categoria c) {
         return sMenu.getItems(c);
     }
 }

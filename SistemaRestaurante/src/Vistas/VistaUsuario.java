@@ -50,7 +50,7 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
         listaItems = new javax.swing.JList();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        areaComentario = new javax.swing.JTextArea();
         bAgregarPedido = new javax.swing.JButton();
         bEliminarPedido = new javax.swing.JButton();
         jPanel5 = new javax.swing.JPanel();
@@ -135,13 +135,18 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
         jLabel3.setText("Ítems");
 
+        listaItems.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                listaItemsValueChanged(evt);
+            }
+        });
         jScrollPane2.setViewportView(listaItems);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Comentario"));
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane3.setViewportView(jTextArea1);
+        areaComentario.setColumns(20);
+        areaComentario.setRows(5);
+        jScrollPane3.setViewportView(areaComentario);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -298,7 +303,11 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bAgregarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarPedidoActionPerformed
-        // TODO add your handling code here:
+        //AgregarValidaciones
+        String itemSeleccionado = (String) listaItems.getSelectedValue();
+        String comentario = (String) areaComentario.getText();
+        
+        cUsuario.agregarPedidos(itemSeleccionado, comentario);
     }//GEN-LAST:event_bAgregarPedidoActionPerformed
 
     private void bLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLoginActionPerformed
@@ -313,16 +322,22 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     private void ListaCategoriasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaCategoriasValueChanged
         // TODO add your handling code here:
         if (!evt.getValueIsAdjusting()) {
-            String seleccion = (String) ListaCategorias.getSelectedValue();
+            Categoria seleccion = (Categoria) ListaCategorias.getSelectedValue();
             cUsuario.cargarItems(seleccion);
         }
     }//GEN-LAST:event_ListaCategoriasValueChanged
 
+    private void listaItemsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaItemsValueChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_listaItemsValueChanged
+
+    
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList ListaCategorias;
     private javax.swing.JTextPane MensajesSistema;
+    private javax.swing.JTextArea areaComentario;
     private javax.swing.JButton bAgregarPedido;
     private javax.swing.JButton bConfirmarPedidos;
     private javax.swing.JButton bEliminarPedido;
@@ -342,7 +357,6 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextArea jTextArea1;
     private javax.swing.JList listaItems;
     private javax.swing.JPasswordField tfContrasena;
     private javax.swing.JTextField tfNombreUsuario;
@@ -365,23 +379,23 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
     @Override
     public void cargarCategorias(ArrayList<Categoria> categorias) {
-        ArrayList<String> listado = new ArrayList();
-        for(Categoria c: categorias){
-            listado.add(c.getNombre());
-        }
-        ListaCategorias.setListData(listado.toArray());
-        
-    }
+        ListaCategorias.setListData(categorias.toArray());
     
-    @Override
-    public void cargarItems(ArrayList<Item> is){
-        ArrayList<String> listado = new ArrayList();
-        for(Item i: is){
-            listado.add(i.getNombre());
-        }
-        listaItems.setListData(listado.toArray());
     }
-           
+//    
+//    @Override
+//    public void cargarItems(ArrayList<Item> is){
+//        ArrayList<String> listado = new ArrayList();
+//        for(Item i: is){
+//            listado.add(i.getNombre());
+//        }
+//        listaItems.setListData(listado.toArray());
+//    }
+              
+    @Override
+    public void cargarItems(ArrayList<Item> items){
+        listaItems.setListData(items.toArray());
+    }
     
       
 }
