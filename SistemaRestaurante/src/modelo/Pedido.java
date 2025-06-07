@@ -7,6 +7,7 @@ public class Pedido {
     private String comentario;
     private EstadoPedido estado;
     private Gestor gestor;
+    
 
     public Pedido(Item item, String comentario) {
         this.item = item;
@@ -40,5 +41,9 @@ public class Pedido {
 
     public void setGestor(Gestor gestor) {
         this.gestor = gestor;
+    }
+    
+    public double getPrecio(){
+        return this.item.getPrecio();
     }
 }

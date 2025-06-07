@@ -21,4 +21,8 @@ public class Servicio {
     public void setMontoTotal(double montoTotal) {
         this.montoTotal = montoTotal;
     }
+    
+    public void agregarNuevoPedido(Pedido pedidoAAgregar){
+        this.pedidos.add(pedidoAAgregar);
+    }
 }

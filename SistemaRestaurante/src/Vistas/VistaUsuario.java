@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import modelo.Categoria;
 import modelo.Item;
+import modelo.RestauranteException;
 
 /**
  *
@@ -22,8 +23,7 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     public VistaUsuario() {
         initComponents();
         this.cUsuario = new ControladorUsuarios(this);
-        
-        
+
     }
 
     /**
@@ -303,11 +303,18 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     }// </editor-fold>//GEN-END:initComponents
 
     private void bAgregarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarPedidoActionPerformed
+       
         //AgregarValidaciones
-        String itemSeleccionado = (String) listaItems.getSelectedValue();
-        String comentario = (String) areaComentario.getText();
-        
-        cUsuario.agregarPedidos(itemSeleccionado, comentario);
+            Item itemSeleccionado = (Item) listaItems.getSelectedValue();
+            String comentario = (String) areaComentario.getText();
+            
+            if(itemSeleccionado != null) {
+                cUsuario.agregarPedidos(itemSeleccionado, comentario);
+            }else{
+                 mostrarMensaje("Debes seleccionar item");
+            }
+           
+
     }//GEN-LAST:event_bAgregarPedidoActionPerformed
 
     private void bLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLoginActionPerformed
@@ -380,7 +387,6 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     @Override
     public void cargarCategorias(ArrayList<Categoria> categorias) {
         ListaCategorias.setListData(categorias.toArray());
-    
     }
 //    
 //    @Override

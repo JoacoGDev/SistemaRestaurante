@@ -38,7 +38,7 @@ public class SistemaUsuarios {
     }
 
     
-    public Cliente loginCliente(int numeroCliente, String password)throws RestauranteException{
+    public Cliente loginCliente(int numeroCliente, String password, Dispositivo dispositivo)throws RestauranteException{
 
          Cliente usuarioCliente = buscarCliente(numeroCliente);
          
@@ -51,14 +51,11 @@ public class SistemaUsuarios {
           if (usuarioCliente.getDispositivo() != null) {
             throw new RestauranteException("El usuario ya se encuentra identificado en otro dispositivo");
           }
-         
-          //Se loguea el usuario, osea se asigna un dispositivo
-          Dispositivo dispositivo = new Dispositivo();
           
-          if (dispositivo.getServicio() != null){
-              throw new RestauranteException("Ya hay un usuario logueado");
+          if(dispositivo.getCliente() != null){
+              throw new RestauranteException("Debe finalizar el servicio");
           }
-          
+          dispositivo.setCliente(usuarioCliente);
           dispositivo.setServicio(new Servicio());
           usuarioCliente.setDispositivo(dispositivo);
 

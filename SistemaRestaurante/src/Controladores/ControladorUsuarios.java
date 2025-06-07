@@ -18,15 +18,17 @@ public class ControladorUsuarios {
     //private VistaUsuario vistaLogin;
     private Fachada f = Fachada.getInstancia();
     private IVistaUsuario vUsuario;
+    private Dispositivo dispositivoUsuario;
 
 
     public ControladorUsuarios(IVistaUsuario vistaUsuario){
         vUsuario = vistaUsuario;
+        this.dispositivoUsuario = f.getDispositivo();
     }
 
     public void loginUsuario(int numeroCliente, String password){
         try{
-            Cliente clienteLogueado = f.loginCliente(numeroCliente, password);
+            Cliente clienteLogueado = f.loginCliente(numeroCliente, password, dispositivoUsuario);
             vUsuario.MostrarUsuario(clienteLogueado.getNombreCompleto());
             vUsuario.mostrarMensaje("Mensajes de Sistema");
             cargarCategorias();
@@ -62,12 +64,6 @@ public class ControladorUsuarios {
         vUsuario.cargarItems(items);
     }
     
-
-    
-    public void agregarPedidos(){
-        
-    }
-    
     public void eliminarPedidos(){
         
     }
@@ -80,11 +76,10 @@ public class ControladorUsuarios {
         
     }
 
-    public void agregarPedidos(String itemSeleccionado, String comentario) {
+    public void agregarPedidos(Item item, String comentario) {
         //itemSeleccionado es un String. Tengo que obtener el objeto item y agregarlo a un pedido
-        //Pedido pedidoAAgregar = new Pedido(itemSeleccionado, comentario);
-        
-        return;
+        Pedido pedidoAAgregar = new Pedido(item, comentario);
+        f.agregarPedido(pedidoAAgregar, this.dispositivoUsuario);
     }
 
     

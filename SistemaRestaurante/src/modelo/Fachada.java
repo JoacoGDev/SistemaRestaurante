@@ -14,6 +14,7 @@ public class Fachada {
     
     private SistemaUsuarios sUsuario = new SistemaUsuarios();
     private SistemaMenu sMenu = new SistemaMenu();
+    private SistemaDispositivo sDispositivo = new SistemaDispositivo();
     
     private static Fachada instancia = new Fachada();
 
@@ -21,7 +22,11 @@ public class Fachada {
         return instancia;
     }
     
-    private Fachada() {
+    private Fachada() { 
+    }
+    
+    public void agregarDispositivo(){
+        sDispositivo.crearDispositivo();
     }
     
     public void agregarCliente(int numeroCliente, String nombreUsuario, String password, String nombreCompleto, TipoCliente tipoCliente) throws RestauranteException {
@@ -33,8 +38,8 @@ public class Fachada {
     }
      
 
-    public Cliente loginCliente(int numeroCliente, String password) throws RestauranteException {
-        return sUsuario.loginCliente(numeroCliente, password);
+    public Cliente loginCliente(int numeroCliente, String password, Dispositivo dispositivo) throws RestauranteException {
+        return sUsuario.loginCliente(numeroCliente, password, dispositivo);
     }
 
     public Menu getMenu() {
@@ -59,6 +64,14 @@ public class Fachada {
 
     public ArrayList<Item> getItems(Categoria c) {
         return sMenu.getItems(c);
+    }
+
+    public Dispositivo getDispositivo() {
+       return sDispositivo.getDispositivoDisponible();
+    }
+
+    public void agregarPedido(Pedido pedidoAAgregar, Dispositivo dispositivoUsuario) {
+        sDispositivo.agregarPedido(pedidoAAgregar, dispositivoUsuario);
     }
 }
     

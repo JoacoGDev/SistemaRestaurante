@@ -21,6 +21,12 @@ public class DatosPrueba {
         
         Fachada f = Fachada.getInstancia();
         try{
+            
+            f.agregarDispositivo();
+            f.agregarDispositivo();
+            
+   
+            
             f.agregarCliente(1, "1", "1", "Juan Paco Pedro De La Mar", TipoCliente.COMUNES);
             f.agregarCliente(232, "Pedro", "pedro", "Pedrito  Pedrón", TipoCliente.DELACASA);
             f.agregarCliente(123, "Andrés", "andres", "Andresitooo", TipoCliente.PREFERENCIALES);
