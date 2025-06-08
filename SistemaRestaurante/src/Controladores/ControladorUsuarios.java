@@ -18,17 +18,17 @@ public class ControladorUsuarios {
     //private VistaUsuario vistaLogin;
     private Fachada f = Fachada.getInstancia();
     private IVistaUsuario vUsuario;
-    private Dispositivo dispositivoUsuario;
+    private Dispositivo dispUsu;
 
 
     public ControladorUsuarios(IVistaUsuario vistaUsuario){
         vUsuario = vistaUsuario;
-        this.dispositivoUsuario = f.getDispositivo();
+        this.dispUsu = f.getDispositivo();
     }
 
     public void loginUsuario(int numeroCliente, String password){
         try{
-            Cliente clienteLogueado = f.loginCliente(numeroCliente, password, dispositivoUsuario);
+            Cliente clienteLogueado = f.loginCliente(numeroCliente, password, dispUsu);
             vUsuario.MostrarUsuario(clienteLogueado.getNombreCompleto());
             vUsuario.mostrarMensaje("Mensajes de Sistema");
             cargarCategorias();
@@ -59,7 +59,6 @@ public class ControladorUsuarios {
     }
     
     public void cargarItems(Categoria cat){
-        
         ArrayList<Item> items = f.getItems(cat);
         vUsuario.cargarItems(items);
     }
@@ -76,10 +75,24 @@ public class ControladorUsuarios {
         
     }
 
-    public void agregarPedidos(Item item, String comentario) {
+    public void agregarPedidos(Item item, String comentario) throws RestauranteException{
         //itemSeleccionado es un String. Tengo que obtener el objeto item y agregarlo a un pedido
         Pedido pedidoAAgregar = new Pedido(item, comentario);
-        f.agregarPedido(pedidoAAgregar, this.dispositivoUsuario);
+        f.agregarPedido(pedidoAAgregar, this.dispUsu);
+        cargarPedidos(pedidoAAgregar);
+        
+    }
+    
+    public void cargarPedidos(Pedido pedidoAAgregar){
+        
+        vUsuario.cargarPedido(pedidoAAgregar);
+    }
+
+    public void borrarPedido(int ind) throws RestauranteException{
+        if (ind == -1){
+            throw new RestauranteException("Seleccione un pedido para eliminarlo");
+        }
+        dispUsu.borrarPedido(ind);
     }
 
     

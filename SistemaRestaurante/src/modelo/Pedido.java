@@ -46,4 +46,12 @@ public class Pedido {
     public double getPrecio(){
         return this.item.getPrecio();
     }
+    
+    @Override
+    public String toString() {
+        return "Item: " + item.getNombre() + 
+           ", Estado: " + estado + 
+           ", Comentario: " + comentario + 
+           ", Gestor: " + gestor.getNombre();
+}
 }

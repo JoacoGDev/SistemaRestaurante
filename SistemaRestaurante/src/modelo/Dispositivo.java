@@ -1,5 +1,7 @@
 package modelo;
 
+import java.util.ArrayList;
+
 public class Dispositivo {
     private static int contadorId = 0;
     private int id;
@@ -36,8 +38,16 @@ public class Dispositivo {
         return servicio;
     }
 
-    void agregarPedido(Pedido pedidoAAgregar) {
+    public void agregarPedido(Pedido pedidoAAgregar) {
         this.servicio.agregarNuevoPedido(pedidoAAgregar);
+    }
+
+    public ArrayList<Pedido> getPedidos() {
+        return servicio.getPedidos();
+    }
+
+    public void borrarPedido(int ind) {
+        this.servicio.borrarPedido(ind);
     }
     
     

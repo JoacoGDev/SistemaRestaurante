@@ -25,4 +25,8 @@ public class Servicio {
     public void agregarNuevoPedido(Pedido pedidoAAgregar){
         this.pedidos.add(pedidoAAgregar);
     }
+    
+    public void borrarPedido(int ind){
+        pedidos.remove(ind);
+    }
 }

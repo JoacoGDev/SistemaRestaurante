@@ -7,6 +7,7 @@ package Controladores;
 import java.util.ArrayList;
 import modelo.Categoria;
 import modelo.Item;
+import modelo.Pedido;
 
 /**
  *
@@ -21,5 +22,7 @@ public interface IVistaUsuario {
     public void cargarCategorias(ArrayList<Categoria> categorias);
 
     public void cargarItems(ArrayList<Item> items);
+
+    public void cargarPedido(Pedido p);
     
 }

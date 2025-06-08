@@ -8,8 +8,10 @@ import Controladores.ControladorUsuarios;
 import Controladores.IVistaUsuario;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import modelo.Categoria;
 import modelo.Item;
+import modelo.Pedido;
 import modelo.RestauranteException;
 
 /**
@@ -57,7 +59,7 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
         bConfirmarPedidos = new javax.swing.JButton();
         bFinalizarServicio = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtPedidos = new javax.swing.JTable();
         jScrollPane5 = new javax.swing.JScrollPane();
         MensajesSistema = new javax.swing.JTextPane();
 
@@ -135,11 +137,6 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
         jLabel3.setText("Ítems");
 
-        listaItems.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
-            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
-                listaItemsValueChanged(evt);
-            }
-        });
         jScrollPane2.setViewportView(listaItems);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Comentario"));
@@ -172,6 +169,11 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
         });
 
         bEliminarPedido.setText("Eliminar Pedido");
+        bEliminarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEliminarPedidoActionPerformed(evt);
+            }
+        });
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Pedidos del servicio"));
 
@@ -179,26 +181,15 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
         bFinalizarServicio.setText("Finalizar Servicio");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Ítem", "Comentario", "Estado", "Unidad", "Gestor", "Precio"
             }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-            }
-        });
-        jScrollPane4.setViewportView(jTable1);
+        ));
+        jScrollPane4.setViewportView(jtPedidos);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -305,15 +296,14 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     private void bAgregarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarPedidoActionPerformed
        
         //AgregarValidaciones
+        try{
             Item itemSeleccionado = (Item) listaItems.getSelectedValue();
             String comentario = (String) areaComentario.getText();
-            
-            if(itemSeleccionado != null) {
-                cUsuario.agregarPedidos(itemSeleccionado, comentario);
-            }else{
-                 mostrarMensaje("Debes seleccionar item");
-            }
-           
+            cUsuario.agregarPedidos(itemSeleccionado, comentario);
+        }
+        catch(RestauranteException ex){
+            mostrarMensaje(ex.getMessage());
+        }
 
     }//GEN-LAST:event_bAgregarPedidoActionPerformed
 
@@ -334,9 +324,17 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
         }
     }//GEN-LAST:event_ListaCategoriasValueChanged
 
-    private void listaItemsValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_listaItemsValueChanged
-        // TODO add your handling code here:
-    }//GEN-LAST:event_listaItemsValueChanged
+    private void bEliminarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarPedidoActionPerformed
+        try{
+            int ind = jtPedidos.getSelectedRow();
+            cUsuario.borrarPedido(ind);
+            DefaultTableModel m = (DefaultTableModel)jtPedidos.getModel();
+            m.removeRow(ind);
+            
+        }catch (RestauranteException ex){
+            mostrarMensaje(ex.getMessage());
+        }
+    }//GEN-LAST:event_bEliminarPedidoActionPerformed
 
     
 
@@ -363,7 +361,7 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jtPedidos;
     private javax.swing.JList listaItems;
     private javax.swing.JPasswordField tfContrasena;
     private javax.swing.JTextField tfNombreUsuario;
@@ -402,6 +400,25 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     public void cargarItems(ArrayList<Item> items){
         listaItems.setListData(items.toArray());
     }
+
+    @Override
+    public void cargarPedido(Pedido p) {
+        DefaultTableModel m = (DefaultTableModel)jtPedidos.getModel();
+        Item i = p.getItems();
+        m.addRow(new Object[] {
+        i != null ? p.getItems().getNombre() : "Sin item",
+        p.getComentario() != null ? p.getComentario() : "Sin comentario",
+        p.getEstado() != null ? p.getEstado().toString() : "Sin estado",
+        i.getUnidadProcesadora() != null ? i.getUnidadProcesadora().getNombre() : "Sin unidad procesadora",
+        p.getGestor() != null ? p.getGestor().getNombre() : "Sin gestor",
+        i.getPrecio()
+              
+            
+        });
     
-      
+    }
 }
+    
+    
+    
+
