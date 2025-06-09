@@ -25,7 +25,7 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     public VistaUsuario() {
         initComponents();
         this.cUsuario = new ControladorUsuarios(this);
-
+        cUsuario.cargarCategorias();
     }
 
     /**
@@ -185,6 +185,11 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
         });
 
         bFinalizarServicio.setText("Finalizar Servicio");
+        bFinalizarServicio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bFinalizarServicioActionPerformed(evt);
+            }
+        });
 
         jtPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -300,15 +305,9 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
     private void bAgregarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bAgregarPedidoActionPerformed
        
-        //AgregarValidaciones
-        try{
             Item itemSeleccionado = (Item) listaItems.getSelectedValue();
             String comentario = (String) areaComentario.getText();
             cUsuario.agregarPedidos(itemSeleccionado, comentario);
-        }
-        catch(RestauranteException ex){
-            mostrarMensaje(ex.getMessage());
-        }
 
     }//GEN-LAST:event_bAgregarPedidoActionPerformed
 
@@ -318,7 +317,6 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
         int numU = Integer.parseInt(tfNum);
         String pass = new String(tfContrasena.getPassword());
         cUsuario.loginUsuario(numU, pass);
-        
     }//GEN-LAST:event_bLoginActionPerformed
 
     private void ListaCategoriasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaCategoriasValueChanged
@@ -330,25 +328,26 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     }//GEN-LAST:event_ListaCategoriasValueChanged
 
     private void bEliminarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarPedidoActionPerformed
-        try{
+
             int ind = jtPedidos.getSelectedRow();
             cUsuario.borrarPedido(ind);
-            DefaultTableModel m = (DefaultTableModel)jtPedidos.getModel();
-            m.removeRow(ind);
-            
-        }catch (RestauranteException ex){
-            mostrarMensaje(ex.getMessage());
-        }
+           if(ind != -1){
+                DefaultTableModel m = (DefaultTableModel)jtPedidos.getModel();
+                m.removeRow(ind);
+           }
+           
     }//GEN-LAST:event_bEliminarPedidoActionPerformed
 
     private void bConfirmarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfirmarPedidosActionPerformed
-        try{
             cUsuario.confirmarServicio();
-            
-        }catch (RestauranteException ex){
-            mostrarMensaje(ex.getMessage());
-        }
     }//GEN-LAST:event_bConfirmarPedidosActionPerformed
+
+    private void bFinalizarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFinalizarServicioActionPerformed
+
+//            //TODO METODO FINALIZAR SERVICIO
+//            cUsuario.finalizarServicio();
+
+    }//GEN-LAST:event_bFinalizarServicioActionPerformed
 
     
 

@@ -74,4 +74,10 @@ public class Pedido {
     public void reintegrarStock() {
         this.item.reintegrarStock();    
     }
+
+    public void validar() throws RestauranteException{
+        if(this.item == null){
+            throw new RestauranteException("Debes seleccionar un Item");
+        }
+    }
 }

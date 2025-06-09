@@ -22,18 +22,25 @@ public class Servicio {
         this.montoTotal = montoTotal;
     }
     
-    public void agregarNuevoPedido(Pedido pedidoAAgregar){
+    public Pedido agregarNuevoPedido(Item item, String comentario)throws RestauranteException{
+        Pedido pedidoAAgregar = new Pedido(item, comentario);
+        pedidoAAgregar.validar();
         this.pedidos.add(pedidoAAgregar);
+        return pedidoAAgregar;
     }
     
     public void borrarPedido(int ind) throws RestauranteException {
-        Pedido p = pedidos.get(ind);
-        if(p.getEstado().equals(EstadoPedido.ENPROCESO)){
-            throw new RestauranteException("Un poco tarde...Ya estamos elaborando este pedido");
+        if (ind != -1) {
+            Pedido p = pedidos.get(ind);
+            if (p.getEstado().equals(EstadoPedido.ENPROCESO)) {
+                throw new RestauranteException("Un poco tarde...Ya estamos elaborando este pedido");
+            }
+            p.reintegrarStock();
+            pedidos.remove(ind);
+        }else{
+            throw new RestauranteException("Debes seleccionar un pedido");
         }
-        p.reintegrarStock();
-        pedidos.remove(ind);
-        
+
     }
 
     public void confirmarServicio() throws RestauranteException {

@@ -58,7 +58,7 @@ public class ControladorUsuarios {
         
     }
     
-    public void cargarItems(Categoria cat){
+    public void cargarItems(Categoria cat) {
         ArrayList<Item> items = f.getItems(cat);
         vUsuario.cargarItems(items);
     }
@@ -75,34 +75,42 @@ public class ControladorUsuarios {
         
     }
 
-    public void agregarPedidos(Item item, String comentario) throws RestauranteException{
+    public void agregarPedidos(Item item, String comentario) {
         //itemSeleccionado es un String. Tengo que obtener el objeto item y agregarlo a un pedido
-        if(item != null){
-            Pedido pedidoAAgregar = new Pedido(item, comentario);
-            f.agregarPedido(pedidoAAgregar, this.dispUsu);
+        try{
+            Pedido pedidoAAgregar = f.agregarPedido(item, comentario, this.dispUsu);
             cargarPedidos(pedidoAAgregar);
-        }else{
-            throw new RestauranteException("Debes Seleccionar un Item");
+        }catch(RestauranteException ex){
+            vUsuario.mostrarMensaje(ex.getMessage());
         }
-  
         
+    
     }
     
     public void cargarPedidos(Pedido pedidoAAgregar){
-        
+     
         vUsuario.cargarPedido(pedidoAAgregar);
     }
 
-    public void borrarPedido(int ind) throws RestauranteException{
-        if (ind == -1){
+    public void borrarPedido(int ind){
+       try{
+            if (ind == -1){
             throw new RestauranteException("Seleccione un pedido para eliminarlo");
         }
         dispUsu.borrarPedido(ind);
+       }catch (RestauranteException ex){
+           vUsuario.mostrarMensaje(ex.getMessage());
+       }
     }
 
-    public void confirmarServicio() throws RestauranteException {
-        dispUsu.confirmarServicio();
-        vUsuario.actualizarTabla(dispUsu.getPedidos());
+    public void confirmarServicio() {
+        
+        try{
+            dispUsu.confirmarServicio();
+            vUsuario.actualizarTabla(dispUsu.getPedidos());
+        }catch(RestauranteException ex){
+            vUsuario.mostrarMensaje(ex.getMessage());
+        }
     }
 
 }

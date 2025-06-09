@@ -70,8 +70,8 @@ public class Fachada {
        return sDispositivo.getDispositivoDisponible();
     }
 
-    public void agregarPedido(Pedido pedidoAAgregar, Dispositivo dispositivoUsuario) {
-        sDispositivo.agregarPedido(pedidoAAgregar, dispositivoUsuario);
+    public Pedido agregarPedido(Item item,String comentario, Dispositivo dispositivoUsuario) throws RestauranteException{
+        return sDispositivo.agregarPedido(item, comentario, dispositivoUsuario);
     }
 }
     

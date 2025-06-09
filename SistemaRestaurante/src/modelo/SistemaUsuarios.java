@@ -64,7 +64,6 @@ public class SistemaUsuarios {
     }
     
     private Cliente buscarCliente(int numeroCliente){
-
         for(Cliente c: clientes){
             if(c.getNumeroCliente() == numeroCliente){
                 return c;

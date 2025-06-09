@@ -38,15 +38,22 @@ public class Dispositivo {
         return servicio;
     }
 
-    public void agregarPedido(Pedido pedidoAAgregar) {
-        this.servicio.agregarNuevoPedido(pedidoAAgregar);
+    public Pedido agregarPedido(Item item, String comentario) throws RestauranteException {
+        if (this.servicio == null) {
+            throw new RestauranteException("Debes iniciar Sesión");
+        }
+        return this.servicio.agregarNuevoPedido(item, comentario);
+
     }
 
     public ArrayList<Pedido> getPedidos() {
         return servicio.getPedidos();
     }
 
-    public void borrarPedido(int ind) throws RestauranteException {
+    public void borrarPedido(int ind) throws RestauranteException{
+        if(servicio == null){
+            throw new RestauranteException("Debes iniciar seisón");
+        }
         this.servicio.borrarPedido(ind);
     }
 

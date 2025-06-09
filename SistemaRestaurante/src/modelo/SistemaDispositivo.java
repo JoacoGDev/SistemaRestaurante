@@ -32,8 +32,8 @@ public class SistemaDispositivo {
         return null;
     }
 
-    public void agregarPedido(Pedido pedidoAAgregar, Dispositivo dispositivoUsuario) {
-        dispositivoUsuario.agregarPedido(pedidoAAgregar);
+    public Pedido agregarPedido(Item item, String comentario, Dispositivo dispositivoUsuario) throws RestauranteException {
+        return dispositivoUsuario.agregarPedido(item, comentario);
     }
        
             
