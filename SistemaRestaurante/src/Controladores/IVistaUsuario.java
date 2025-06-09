@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import modelo.Categoria;
 import modelo.Item;
 import modelo.Pedido;
+import modelo.Servicio;
 
 /**
  *
@@ -24,5 +25,9 @@ public interface IVistaUsuario {
     public void cargarItems(ArrayList<Item> items);
 
     public void cargarPedido(Pedido p);
+    
+    public void actualizarTabla(ArrayList<Pedido> pedidos);
+         
+     
     
 }

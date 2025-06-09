@@ -77,9 +77,14 @@ public class ControladorUsuarios {
 
     public void agregarPedidos(Item item, String comentario) throws RestauranteException{
         //itemSeleccionado es un String. Tengo que obtener el objeto item y agregarlo a un pedido
-        Pedido pedidoAAgregar = new Pedido(item, comentario);
-        f.agregarPedido(pedidoAAgregar, this.dispUsu);
-        cargarPedidos(pedidoAAgregar);
+        if(item != null){
+            Pedido pedidoAAgregar = new Pedido(item, comentario);
+            f.agregarPedido(pedidoAAgregar, this.dispUsu);
+            cargarPedidos(pedidoAAgregar);
+        }else{
+            throw new RestauranteException("Debes Seleccionar un Item");
+        }
+  
         
     }
     
@@ -95,6 +100,9 @@ public class ControladorUsuarios {
         dispUsu.borrarPedido(ind);
     }
 
-    
+    public void confirmarServicio() throws RestauranteException {
+        dispUsu.confirmarServicio();
+        vUsuario.actualizarTabla(dispUsu.getPedidos());
+    }
 
 }

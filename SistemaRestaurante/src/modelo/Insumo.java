@@ -35,4 +35,16 @@ public class Insumo {
     public void setStock(int stock) {
         this.stock = stock;
     }
+    
+    public void descontarStock(int cantidad) throws RestauranteException {
+        if(stock - cantidad > stockMin){
+            stock -= cantidad;
+        }else{
+            throw new RestauranteException("No hay stock disponible");
+        }
+    }
+
+    public void reintegrarStock(int cantidad) {
+        stock += cantidad;
+    }
 }

@@ -46,8 +46,15 @@ public class Dispositivo {
         return servicio.getPedidos();
     }
 
-    public void borrarPedido(int ind) {
+    public void borrarPedido(int ind) throws RestauranteException {
         this.servicio.borrarPedido(ind);
+    }
+
+    public void confirmarServicio() throws RestauranteException {
+        if(this.servicio == null){
+            throw new RestauranteException("Debes iniciar sesión");
+        }
+        this.servicio.confirmarServicio();
     }
     
     

@@ -178,6 +178,11 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Pedidos del servicio"));
 
         bConfirmarPedidos.setText("Confirmar Pedidos");
+        bConfirmarPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bConfirmarPedidosActionPerformed(evt);
+            }
+        });
 
         bFinalizarServicio.setText("Finalizar Servicio");
 
@@ -336,6 +341,15 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
         }
     }//GEN-LAST:event_bEliminarPedidoActionPerformed
 
+    private void bConfirmarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfirmarPedidosActionPerformed
+        try{
+            cUsuario.confirmarServicio();
+            
+        }catch (RestauranteException ex){
+            mostrarMensaje(ex.getMessage());
+        }
+    }//GEN-LAST:event_bConfirmarPedidosActionPerformed
+
     
 
 
@@ -402,21 +416,33 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     }
 
     @Override
+
     public void cargarPedido(Pedido p) {
-        DefaultTableModel m = (DefaultTableModel)jtPedidos.getModel();
+        
+        DefaultTableModel m = (DefaultTableModel) jtPedidos.getModel();
         Item i = p.getItems();
+
         m.addRow(new Object[] {
-        i != null ? p.getItems().getNombre() : "Sin item",
-        p.getComentario() != null ? p.getComentario() : "Sin comentario",
-        p.getEstado() != null ? p.getEstado().toString() : "Sin estado",
-        i.getUnidadProcesadora() != null ? i.getUnidadProcesadora().getNombre() : "Sin unidad procesadora",
-        p.getGestor() != null ? p.getGestor().getNombre() : "Sin gestor",
-        i.getPrecio()
-              
-            
-        });
-    
+            i != null ? i.getNombre() : "Sin item",
+            p.getComentario() != null ? p.getComentario() : "Sin comentario",
+            p.getEstado() != null ? p.getEstado().toString() : "Sin estado",
+            (i != null && i.getUnidadProcesadora() != null) ? i.getUnidadProcesadora().getNombre() : "Sin unidad procesadora",
+            (p.getGestor() != null) ? p.getGestor().getNombre() : "Sin gestor",
+            (i != null) ? i.getPrecio() : 0.0
+    });
+
+
     }
+    
+    @Override
+     public void actualizarTabla(ArrayList<Pedido> pedidos){
+         DefaultTableModel m = (DefaultTableModel)jtPedidos.getModel();
+            m.setRowCount(0);
+         for(Pedido p: pedidos){     
+             cargarPedido(p);
+         }
+     }
+    
 }
     
     

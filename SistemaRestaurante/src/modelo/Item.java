@@ -58,9 +58,30 @@ public class Item {
         }
         return true;
     }
+    
+    public void descontarStock() throws RestauranteException{
+        
+         for(Ingrediente i: ingredientes){
+            if(!i.isDisponible()){
+               i.descontarStock();
+            }
+         }
+
+    }
 
     @Override
     public String toString() {
         return nombre;
     }
+
+    public void reintegrarStock() {
+        
+          for(Ingrediente i: ingredientes){
+            if(!i.isDisponible()){
+               i.reintegrarStock();
+            }
+         }
+    }
+
+
 }

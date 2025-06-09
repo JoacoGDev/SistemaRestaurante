@@ -29,4 +29,13 @@ public class Ingrediente {
     public boolean isDisponible() {
         return (insumo.getStock() - cantidad) > insumo.getStockMin();
     }
+
+
+    public void descontarStock() throws RestauranteException {
+        this.insumo.descontarStock(cantidad);
+    }
+
+    void reintegrarStock() {
+         this.insumo.reintegrarStock(cantidad);
+    }
 }

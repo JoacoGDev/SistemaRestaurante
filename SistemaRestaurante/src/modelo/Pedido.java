@@ -34,6 +34,13 @@ public class Pedido {
     public void setEstado(EstadoPedido estado) {
         this.estado = estado;
     }
+    
+    public void confirmarPedido() throws RestauranteException{
+
+        item.descontarStock();
+        this.setEstado(EstadoPedido.CONFIRMADO);
+     
+    }
 
     public Gestor getGestor() {
         return gestor;
@@ -47,6 +54,10 @@ public class Pedido {
         return this.item.getPrecio();
     }
     
+    public String getNombre(){
+        return this.item.getNombre();
+    }
+    
     @Override
     public String toString() {
         return "Item: " + item.getNombre() + 
@@ -54,4 +65,13 @@ public class Pedido {
            ", Comentario: " + comentario + 
            ", Gestor: " + gestor.getNombre();
 }
+
+    public boolean isDisponible() {
+        return this.item.isDisponible();
+    }
+
+
+    public void reintegrarStock() {
+        this.item.reintegrarStock();    
+    }
 }
