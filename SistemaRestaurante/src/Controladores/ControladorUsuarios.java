@@ -58,21 +58,15 @@ public class ControladorUsuarios {
         
     }
     
-    public void cargarItems(Categoria cat) {
-        ArrayList<Item> items = f.getItems(cat);
+    public void cargarItems(String nom) {
+        ArrayList<Item> items = f.getItems(nom);
         vUsuario.cargarItems(items);
     }
     
-    public void eliminarPedidos(){
-        
-    }
-    
-    public void confirmarPedidos(){
-        
-    }
     
     public void finalizarServicio(){
-        
+        String totalServ = dispUsu.finalizarServicio();
+        vUsuario.mostrarMensaje(totalServ);
     }
 
     public void agregarPedidos(Item item, String comentario) {
@@ -94,7 +88,7 @@ public class ControladorUsuarios {
 
     public void borrarPedido(int ind){
        try{
-            if (ind == -1){
+        if (ind == -1){
             throw new RestauranteException("Seleccione un pedido para eliminarlo");
         }
         dispUsu.borrarPedido(ind);

@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Item {
 
@@ -83,5 +84,17 @@ public class Item {
          }
     }
 
+    public void agregarIngrediente(Ingrediente in) {
+        this.ingredientes.add(in);
+    }
+
+    public boolean equals(Item o) {
+        if (o == null){
+            return false;
+        }
+        return this.nombre.equals(o.nombre);
+    }
+
+    
 
 }

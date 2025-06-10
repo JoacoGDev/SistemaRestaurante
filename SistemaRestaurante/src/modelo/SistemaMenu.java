@@ -7,11 +7,12 @@ import java.util.ArrayList;
 public class SistemaMenu {
     
     private Menu menuActual;
+    
 
     public SistemaMenu() {
         this.menuActual = menuActual;
     }
-
+    
     public Menu getMenuActual() {
         return menuActual;
     }
@@ -32,7 +33,8 @@ public class SistemaMenu {
         return this.menuActual.getCategorias();
     }
     
-    public ArrayList<Item> getItems(Categoria c) {
+    public ArrayList<Item> getItems(String nom) {
+        Categoria c = menuActual.buscarCategoria(nom);
         ArrayList<Item> items = menuActual.getItem(c);
         ArrayList<Item> itemsConStock = new ArrayList<>();
         

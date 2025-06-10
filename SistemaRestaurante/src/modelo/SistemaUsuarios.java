@@ -11,7 +11,7 @@ public class SistemaUsuarios {
     
     public ArrayList<Cliente> clientes = new ArrayList();
     public ArrayList<Gestor> gestores = new ArrayList();
-
+    private ArrayList<TipoCliente> tiposCliente = new ArrayList<>();
 
     public void agregarCliente(int numeroCliente, String nombreUsuario, String password, String nombreCompleto, TipoCliente tipoCliente) throws RestauranteException {
         // Verificamos si el número de cliente ya existe
@@ -25,7 +25,7 @@ public class SistemaUsuarios {
         clientes.add(nuevoCliente);
     }
     
-       public void agregarGestores(String nombreCompleto, String password, String nombreUsuario) throws RestauranteException {
+       public void agregarGestores(String nombreCompleto, String password, String nombreUsuario, UnidadProcesadora up) throws RestauranteException {
         // Verificamos si el número de cliente ya existe
         for (Gestor g : gestores) {
             if (g.getUsuario().equals(nombreUsuario)) {
@@ -70,6 +70,14 @@ public class SistemaUsuarios {
             }
         }
         return null;
+    }
+
+    public ArrayList<TipoCliente> getTiposCliente() {
+        return tiposCliente;
+    }
+    
+    public void agregarTipoCliente(TipoCliente tc){
+        tiposCliente.add(tc);
     }
 
  

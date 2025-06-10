@@ -63,6 +63,12 @@ public class Dispositivo {
         }
         this.servicio.confirmarServicio();
     }
+
+    public String finalizarServicio() {
+        TipoCliente tc = this.getCliente().getTipoCliente();
+        String ret = this.getServicio().calcularPrecio(tc);
+        return ret;
+    }
     
     
 }

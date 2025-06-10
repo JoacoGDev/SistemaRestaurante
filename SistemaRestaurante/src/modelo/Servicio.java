@@ -1,9 +1,15 @@
 package modelo;
 
 import java.util.ArrayList;
+import observador.Observable;
 
-public class Servicio {
-    private ArrayList <Pedido> pedidos = new ArrayList<>();
+public class Servicio extends Observable{
+
+    
+    
+    public enum eventos{cambioListaPedidos};
+    
+    private ArrayList<Pedido> pedidos = new ArrayList<>();
     private double montoTotal;
 
     public Servicio() {
@@ -26,6 +32,7 @@ public class Servicio {
         Pedido pedidoAAgregar = new Pedido(item, comentario);
         pedidoAAgregar.validar();
         this.pedidos.add(pedidoAAgregar);
+        avisar(eventos.cambioListaPedidos);
         return pedidoAAgregar;
     }
     
@@ -76,8 +83,10 @@ public class Servicio {
         if (!hayConfirmaciones) {
             throw new RestauranteException("No se pudo confirmar ningún pedido.");
         }
-        
-        
+    }
+    
+    public String calcularPrecio(TipoCliente tc) {
+        return tc.descuento(pedidos);
     }
 
 }

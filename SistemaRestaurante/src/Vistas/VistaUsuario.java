@@ -237,10 +237,8 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane5)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                        .addGap(6, 6, 6)
-                        .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
@@ -323,7 +321,7 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
         // TODO add your handling code here:
         if (!evt.getValueIsAdjusting()) {
             Categoria seleccion = (Categoria) ListaCategorias.getSelectedValue();
-            cUsuario.cargarItems(seleccion);
+            cUsuario.cargarItems(seleccion.getNombre());
         }
     }//GEN-LAST:event_ListaCategoriasValueChanged
 
@@ -343,10 +341,8 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     }//GEN-LAST:event_bConfirmarPedidosActionPerformed
 
     private void bFinalizarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFinalizarServicioActionPerformed
-
-//            //TODO METODO FINALIZAR SERVICIO
-//            cUsuario.finalizarServicio();
-
+        new VistaConfirmar(this, false).setVisible(true);
+        cUsuario.finalizarServicio();    
     }//GEN-LAST:event_bFinalizarServicioActionPerformed
 
     

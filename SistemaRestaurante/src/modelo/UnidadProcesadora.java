@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 public class UnidadProcesadora {
 
+    
+
     private String nombre;
     private ArrayList<Gestor> gestores = new ArrayList();
 
@@ -22,4 +24,5 @@ public class UnidadProcesadora {
     public ArrayList<Gestor> getGestores() {
         return gestores;
     }
+    
 }

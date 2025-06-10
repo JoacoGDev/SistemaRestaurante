@@ -1,5 +1,7 @@
 package modelo;
 
+//CAMBIAR DE ENUM A STATE O STRATEGY 
+
 public enum EstadoPedido {
     NOCONFIRMADO("No confirmado"), 
     CONFIRMADO("Confirmado"), 

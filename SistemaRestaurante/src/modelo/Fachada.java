@@ -15,6 +15,7 @@ public class Fachada {
     private SistemaUsuarios sUsuario = new SistemaUsuarios();
     private SistemaMenu sMenu = new SistemaMenu();
     private SistemaDispositivo sDispositivo = new SistemaDispositivo();
+    private SistemaUp sUnidadP = new SistemaUp();
     
     private static Fachada instancia = new Fachada();
 
@@ -33,8 +34,8 @@ public class Fachada {
         sUsuario.agregarCliente(numeroCliente, nombreUsuario, password, nombreCompleto, tipoCliente);
     }
     
-     public void agregarGestores(String nombreCompleto, String password, String nombreUsuario) throws RestauranteException {
-        sUsuario.agregarGestores(nombreCompleto, password, nombreUsuario);
+     public void agregarGestores(String nombreCompleto, String password, String nombreUsuario, UnidadProcesadora up) throws RestauranteException {
+        sUsuario.agregarGestores(nombreCompleto, password, nombreUsuario, up);
     }
      
 
@@ -62,7 +63,7 @@ public class Fachada {
         sMenu.agregarItem(cat, i);
     }
 
-    public ArrayList<Item> getItems(Categoria c) {
+    public ArrayList<Item> getItems(String c) {
         return sMenu.getItems(c);
     }
 
@@ -73,6 +74,20 @@ public class Fachada {
     public Pedido agregarPedido(Item item,String comentario, Dispositivo dispositivoUsuario) throws RestauranteException{
         return sDispositivo.agregarPedido(item, comentario, dispositivoUsuario);
     }
+
+    public void agregarUp(String nom) {
+        sUnidadP.agregarUp(nom);
+    }
+
+    public UnidadProcesadora obtenerUp(String nom) throws RestauranteException{
+        return sUnidadP.obtnereUp(nom);
+    }
+
+    public void agregarTipoCliente(TipoCliente tc) {
+        sUsuario.agregarTipoCliente(tc);
+    }
+    
+
 }
     
 
