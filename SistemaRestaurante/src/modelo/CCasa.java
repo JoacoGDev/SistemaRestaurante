@@ -16,17 +16,29 @@ public class CCasa extends TipoCliente{
         super("De la casa");
     }
 
-    @Override
-    public String descuento(ArrayList<Pedido> pedidos) {
-        String ret = "";
-        double total = 0;
-        for (Pedido p : pedidos){
-            total += p.getPrecio();
-        }
-        total = total - 500;
-        ret = "Te invitamos $500 de la casa! - Beneficio: 500 - Total: " + total;
-        return ret;
+@Override
+public String descuento(ArrayList<Pedido> pedidos) {
+    final double DESCUENTO_CASA = 500.0;
+    double total = 0;
 
+    for (Pedido p : pedidos) {
+        total += p.getPrecio();
     }
+
+    double totalConDescuento = total - DESCUENTO_CASA;
+    if (totalConDescuento < 0) {
+        totalConDescuento = 0;
+    }
+
+    String mensaje = String.format(
+        "Beneficio aplicado: $%.2f por ser cliente De la Casa\n" +
+        "Monto original: $%.2f\n" +
+        "Total a pagar: $%.2f",
+        DESCUENTO_CASA, total, totalConDescuento
+    );
+
+    return mensaje;
+}
+
     
 }

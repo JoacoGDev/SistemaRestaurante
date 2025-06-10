@@ -10,6 +10,7 @@ public class Menu {
         return categorias;
     }
     
+
     public void agregarCategoria(Categoria c){
         /*for(Categoria c1 : categorias){
             if (c.equals(c1)){

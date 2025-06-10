@@ -65,8 +65,8 @@ public class Dispositivo {
     }
 
     public String finalizarServicio() {
-        TipoCliente tc = this.getCliente().getTipoCliente();
-        String ret = this.getServicio().calcularPrecio(tc);
+        TipoCliente tc = this.cliente.getTipoCliente();
+        String ret = this.servicio.calcularPrecio(tc);
         return ret;
     }
     

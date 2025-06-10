@@ -63,7 +63,7 @@ public class Item {
     public void descontarStock() throws RestauranteException{
         
          for(Ingrediente i: ingredientes){
-            if(!i.isDisponible()){
+            if(i.isDisponible()){
                i.descontarStock();
             }
          }

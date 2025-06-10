@@ -31,7 +31,6 @@ public class ControladorUsuarios {
             Cliente clienteLogueado = f.loginCliente(numeroCliente, password, dispUsu);
             vUsuario.MostrarUsuario(clienteLogueado.getNombreCompleto());
             vUsuario.mostrarMensaje("Mensajes de Sistema");
-            cargarCategorias();
          
         }catch(RestauranteException ex){
            vUsuario.mostrarMensaje(ex.getMessage());
@@ -104,6 +103,7 @@ public class ControladorUsuarios {
             vUsuario.actualizarTabla(dispUsu.getPedidos());
         }catch(RestauranteException ex){
             vUsuario.mostrarMensaje(ex.getMessage());
+            vUsuario.actualizarTabla(dispUsu.getPedidos());
         }
     }
 

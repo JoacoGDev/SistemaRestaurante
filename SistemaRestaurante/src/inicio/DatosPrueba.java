@@ -65,18 +65,32 @@ public class DatosPrueba {
             f.agregarCategoria(new Categoria("Vino"));
             f.agregarCategoria(new Categoria("Cafe"));
             
-            TipoCliente tc = new CComun();
-            f.agregarTipoCliente(tc);
-            f.agregarCliente(1, "1", "1", "Juan Paco Pedro De La Mar", tc);
-            tc = new CCasa();
-            f.agregarTipoCliente(tc);
-            f.agregarCliente(2, "2", "2", "Pedrito  Pedrón", tc);
-            tc = new CFrecuente(f.getItems("Cafe"));
-            f.agregarTipoCliente(tc);
-            f.agregarCliente(3, "3", "3", "Andresitooo", tc);
-            tc = new CPreferencial();
-            f.agregarTipoCliente(tc);
-            f.agregarCliente(4, "4", "4", "Julian Mazza", tc);
+            // Inicializar tipos de clientes y agregarlos junto a sus respectivos clientes
+// Se asume que `f.getItems("Cafe")` devuelve una lista de nombres o ítems de café
+// Lista de tipos de clientes disponibles
+            TipoCliente comun = new CComun();
+            TipoCliente casa = new CCasa();
+            TipoCliente frecuente = new CFrecuente(f.getItems("Cafe"));
+            TipoCliente preferencial = new CPreferencial();
+
+// Registrar tipos en el sistema
+            f.agregarTipoCliente(comun);
+            f.agregarTipoCliente(casa);
+            f.agregarTipoCliente(frecuente);
+            f.agregarTipoCliente(preferencial);
+
+// Crear clientes y asignarles su tipo correspondiente
+            f.agregarCliente(1, "1", "1", "Juan Paco Pedro De La Mar", comun);           // Común
+            f.agregarCliente(2, "2", "2", "Pedrito Pedrón", casa);                      // De la Casa
+            f.agregarCliente(3, "3", "3", "Andresitooo", frecuente);                    // Frecuente
+            f.agregarCliente(4, "4", "4", "Julian Mazza", preferencial);               // Preferencial
+
+// Agregar más clientes para testear mejor cada caso
+            f.agregarCliente(5, "5", "5", "Laura Común", new CComun());
+            f.agregarCliente(6, "6", "6", "Carlos Casa", new CCasa());
+            f.agregarCliente(7, "7", "7", "María Cafetera", new CFrecuente(f.getItems("Cafe")));
+            f.agregarCliente(8, "8", "8", "Tito Preferido", new CPreferencial());
+
             
             f.agregarGestores("Juan Carlos", "1", "1", f.obtenerUp("Cocina"));
             f.agregarGestores("Pedro Pascal", "Pedrito", "PedroPedrin", f.obtenerUp("Cocina"));
@@ -84,71 +98,178 @@ public class DatosPrueba {
             f.agregarGestores("Agustin", "Agustin51", "ElFornais", f.obtenerUp("Cocina"));
             
             
+            // === Insumos ===
+            Insumo panRallado = new Insumo("Pan rallado", 10, 50);
+            Insumo pollo = new Insumo("Pollo", 5, 46);
+            Insumo lechuga = new Insumo("Lechuga", 5, 70);
+            Insumo tomate = new Insumo("Tomate", 6, 74);
+            Insumo huevo = new Insumo("Huevo", 12, 25);
+            Insumo cebolla = new Insumo("Cebolla", 8, 30);
+            Insumo papa = new Insumo("Papa", 15, 40);
+            Insumo aceite = new Insumo("Aceite vegetal", 20, 100);
+            Insumo azucar = new Insumo("Azúcar", 20, 80);
+            Insumo leche = new Insumo("Leche", 10, 90);
+            Insumo cafeMolido = new Insumo("Café molido", 15, 60);
+            Insumo chocolate = new Insumo("Chocolate", 10, 120);
+            Insumo gelatina = new Insumo("Gelatina sin sabor", 5, 30);
 
-            Insumo i = new Insumo("Pan rallado", 10, 50);
-            Item it = new Item("Alitas de pollo", 300, f.obtenerUp("Cocina"));
-            Ingrediente in = new Ingrediente(1, i);
-            f.agregarItem("Entrada", it);
-            it.agregarIngrediente(in);
-            Item it2 = new Item("Pollo frito", 780, f.obtenerUp("Cocina"));
-            f.agregarItem("Principal", it2);
-            in = new Ingrediente(2, i);
-            it2.agregarIngrediente(in);
-            
+// === Entrada ===
+            Item alitas = new Item("Alitas de pollo", 300, f.obtenerUp("Cocina"));
+            f.agregarItem("Entrada", alitas);
+            alitas.agregarIngrediente(new Ingrediente(1, panRallado));
+            alitas.agregarIngrediente(new Ingrediente(40, pollo));
+            alitas.agregarIngrediente(new Ingrediente(1, huevo));
 
-            i = new Insumo("Pollo", 5, 46);
-            in = new Ingrediente(40, i);
-            it.agregarIngrediente(in);
-            in = new Ingrediente(3, i);
-            it2.agregarIngrediente(in);
+            Item ensalada = new Item("Ensalada fresca", 150, f.obtenerUp("Cocina"));
+            f.agregarItem("Entrada", ensalada);
+            ensalada.agregarIngrediente(new Ingrediente(3, lechuga));
+            ensalada.agregarIngrediente(new Ingrediente(3, tomate));
+            ensalada.agregarIngrediente(new Ingrediente(1, cebolla));
 
-            i = new Insumo ("Lechuga", 5, 70);
-            it = new Item("Ensalada", 150, f.obtenerUp("Cocina"));
-            f.agregarItem("Entrada", it);
-            in = new Ingrediente(3, i);
-            it.agregarIngrediente(in);
+// === Principal ===
+            Item polloFrito = new Item("Pollo frito", 780, f.obtenerUp("Cocina"));
+            f.agregarItem("Principal", polloFrito);
+            polloFrito.agregarIngrediente(new Ingrediente(2, panRallado));
+            polloFrito.agregarIngrediente(new Ingrediente(3, pollo));
+            polloFrito.agregarIngrediente(new Ingrediente(2, aceite));
 
-            i = new Insumo("Tomate", 6, 74);
-            in = new Ingrediente(3, i);
-            it.agregarIngrediente(in);
+// === Acompañamientos ===
+            Item papasFritas = new Item("Papas fritas", 350, f.obtenerUp("Cocina"));
+            f.agregarItem("Acompañamiento", papasFritas);
+            papasFritas.agregarIngrediente(new Ingrediente(3, papa));
+            papasFritas.agregarIngrediente(new Ingrediente(1, aceite));
 
-            it =new Item("Alitas de chocolate", 230, f.obtenerUp("Cocina"));
-            f.agregarItem("Postre", it);
+            Item arosCebolla = new Item("Aros de cebolla", 380, f.obtenerUp("Cocina"));
+            f.agregarItem("Acompañamiento", arosCebolla);
+            arosCebolla.agregarIngrediente(new Ingrediente(2, cebolla));
+            arosCebolla.agregarIngrediente(new Ingrediente(1, panRallado));
+            arosCebolla.agregarIngrediente(new Ingrediente(1, huevo));
 
-            it = new Item("Flan", 200, f.obtenerUp("Cafeteria"));
-            f.agregarItem("Postre", it);
+// === Postres ===
+            Item alitasChoco = new Item("Alitas de chocolate", 230, f.obtenerUp("Cocina"));
+            f.agregarItem("Postre", alitasChoco);
+            alitasChoco.agregarIngrediente(new Ingrediente(2, chocolate));
+            alitasChoco.agregarIngrediente(new Ingrediente(1, leche));
 
-            it = new Item("Papas fritas", 350, f.obtenerUp("Cocina"));
-            f.agregarItem("Acompañamiento", it);
+            Item flan = new Item("Flan casero", 200, f.obtenerUp("Cafeteria"));
+            f.agregarItem("Postre", flan);
+            flan.agregarIngrediente(new Ingrediente(2, huevo));
+            flan.agregarIngrediente(new Ingrediente(1, leche));
+            flan.agregarIngrediente(new Ingrediente(1, azucar));
+            flan.agregarIngrediente(new Ingrediente(1, gelatina));
 
-            it = new Item("Aros de cebolla", 380, f.obtenerUp("Cocina"));
-            f.agregarItem("Acompañamiento", it);
+// === Bebidas ===
+            f.agregarItem("Bebida", new Item("Coca-Cola 1L", 170, f.obtenerUp("Bar")));
+            f.agregarItem("Bebida", new Item("Agua mineral 700ml", 120, f.obtenerUp("Bar")));
 
-            it = new Item("Coca 1L", 170, f.obtenerUp("Bar"));
-            f.agregarItem("Bebida", it);
+// === Vinos ===
+            f.agregarItem("Vino", new Item("Faisán", 150, f.obtenerUp("Bar")));
+            f.agregarItem("Vino", new Item("Santa Teresa", 130, f.obtenerUp("Bar")));
 
-            it = new Item("Agua mineral 700ml", 120, f.obtenerUp("Bar"));
-            f.agregarItem("Bebida", it);
+// === Cafés ===
+            Item cafeNegro = new Item("Café negro", 120, f.obtenerUp("Cafeteria"));
+            f.agregarItem("Cafe", cafeNegro);
+            cafeNegro.agregarIngrediente(new Ingrediente(1, cafeMolido));
 
-            it = new Item("Faisan", 150, f.obtenerUp("Bar"));
-            f.agregarItem("Vino", it);
+            Item expresso = new Item("Expresso", 140, f.obtenerUp("Cafeteria"));
+            f.agregarItem("Cafe", expresso);
+            expresso.agregarIngrediente(new Ingrediente(1, cafeMolido));
 
-            it = new Item("Santa teresa", 130, f.obtenerUp("Bar"));
-            f.agregarItem("Vino", it);
+            Item capuchino = new Item("Capuchino", 160, f.obtenerUp("Cafeteria"));
+            f.agregarItem("Cafe", capuchino);
+            capuchino.agregarIngrediente(new Ingrediente(1, cafeMolido));
+            capuchino.agregarIngrediente(new Ingrediente(1, leche));
+            capuchino.agregarIngrediente(new Ingrediente(1, azucar));
 
-            it = new Item("Negro", 120, f.obtenerUp("Cafeteria"));
-            f.agregarItem("Cafe", it);
+            // === Nuevos Insumos ===
+            Insumo queso = new Insumo("Queso", 10, 110);
+            Insumo jamon = new Insumo("Jamón", 10, 95);
+            Insumo pan = new Insumo("Pan", 20, 80);
+            Insumo carne = new Insumo("Carne vacuna", 8, 130);
+            Insumo arroz = new Insumo("Arroz", 15, 60);
+            Insumo crema = new Insumo("Crema de leche", 10, 100);
+            Insumo frutilla = new Insumo("Frutilla", 10, 90);
+            Insumo vainilla = new Insumo("Esencia de vainilla", 5, 50);
+            Insumo hielo = new Insumo("Hielo", 50, 10);
+            Insumo limon = new Insumo("Limón", 8, 40);
+            Insumo manzana = new Insumo("Manzana", 3, 47);
+            Insumo naranja = new Insumo("Naranja", 5, 40);
+            Insumo manteca = new Insumo("Manteca", 1, 70);
+            Insumo zanahoria = new Insumo("Zanahoria", 3, 34);
 
-            it = new Item("Expresso", 140, f.obtenerUp("Cafeteria"));
-            f.agregarItem("Cafe", it);
 
-            it = new Item("Capuchino", 160, f.obtenerUp("Cafeteria"));
-            f.agregarItem("Cafe", it);
+// === Entradas ===
+            Item bruschetta = new Item("Bruschetta de jamón y queso", 250, f.obtenerUp("Cocina"));
+            f.agregarItem("Entrada", bruschetta);
+            bruschetta.agregarIngrediente(new Ingrediente(1, pan));
+            bruschetta.agregarIngrediente(new Ingrediente(1, jamon));
+            bruschetta.agregarIngrediente(new Ingrediente(1, queso));
 
+            Item sopaVerduras = new Item("Sopa de verduras", 220, f.obtenerUp("Cocina"));
+            f.agregarItem("Entrada", sopaVerduras);
+            sopaVerduras.agregarIngrediente(new Ingrediente(2, cebolla));
+            sopaVerduras.agregarIngrediente(new Ingrediente(1, papa));
+            sopaVerduras.agregarIngrediente(new Ingrediente(1, zanahoria));
 
+// === Principales ===
+            Item hamburguesa = new Item("Hamburguesa completa", 850, f.obtenerUp("Cocina"));
+            f.agregarItem("Principal", hamburguesa);
+            hamburguesa.agregarIngrediente(new Ingrediente(1, pan));
+            hamburguesa.agregarIngrediente(new Ingrediente(1, carne));
+            hamburguesa.agregarIngrediente(new Ingrediente(1, queso));
+            hamburguesa.agregarIngrediente(new Ingrediente(1, lechuga));
+            hamburguesa.agregarIngrediente(new Ingrediente(1, tomate));
 
+            Item arrozPollo = new Item("Arroz con pollo", 700, f.obtenerUp("Cocina"));
+            f.agregarItem("Principal", arrozPollo);
+            arrozPollo.agregarIngrediente(new Ingrediente(3, arroz));
+            arrozPollo.agregarIngrediente(new Ingrediente(2, pollo));
+            arrozPollo.agregarIngrediente(new Ingrediente(1, cebolla));
 
+// === Acompañamientos ===
+            Item purePapa = new Item("Puré de papa", 320, f.obtenerUp("Cocina"));
+            f.agregarItem("Acompañamiento", purePapa);
+            purePapa.agregarIngrediente(new Ingrediente(3, papa));
+            purePapa.agregarIngrediente(new Ingrediente(1, leche));
+            purePapa.agregarIngrediente(new Ingrediente(1, manteca));
 
+// === Postres ===
+            Item mousseChocolate = new Item("Mousse de chocolate", 260, f.obtenerUp("Cocina"));
+            f.agregarItem("Postre", mousseChocolate);
+            mousseChocolate.agregarIngrediente(new Ingrediente(2, chocolate));
+            mousseChocolate.agregarIngrediente(new Ingrediente(1, crema));
+            mousseChocolate.agregarIngrediente(new Ingrediente(1, huevo));
+
+            Item ensaladaFrutas = new Item("Ensalada de frutas", 210, f.obtenerUp("Cocina"));
+            f.agregarItem("Postre", ensaladaFrutas);
+            ensaladaFrutas.agregarIngrediente(new Ingrediente(2, frutilla));
+            ensaladaFrutas.agregarIngrediente(new Ingrediente(2, manzana));
+            ensaladaFrutas.agregarIngrediente(new Ingrediente(1, naranja));
+
+// === Bebidas ===
+            Item limonada = new Item("Limonada fresca", 140, f.obtenerUp("Bar"));
+            f.agregarItem("Bebida", limonada);
+            limonada.agregarIngrediente(new Ingrediente(2, limon));
+            limonada.agregarIngrediente(new Ingrediente(1, azucar));
+            limonada.agregarIngrediente(new Ingrediente(2, hielo));
+
+            Item licuadoFrutilla = new Item("Licuado de frutilla", 180, f.obtenerUp("Bar"));
+            f.agregarItem("Bebida", licuadoFrutilla);
+            licuadoFrutilla.agregarIngrediente(new Ingrediente(3, frutilla));
+            licuadoFrutilla.agregarIngrediente(new Ingrediente(1, leche));
+            licuadoFrutilla.agregarIngrediente(new Ingrediente(1, azucar));
+
+// === Cafés ===
+            Item latte = new Item("Latte", 150, f.obtenerUp("Cafeteria"));
+            f.agregarItem("Cafe", latte);
+            latte.agregarIngrediente(new Ingrediente(1, cafeMolido));
+            latte.agregarIngrediente(new Ingrediente(1, leche));
+
+            Item mocaccino = new Item("Mocaccino", 170, f.obtenerUp("Cafeteria"));
+            f.agregarItem("Cafe", mocaccino);
+            mocaccino.agregarIngrediente(new Ingrediente(1, cafeMolido));
+            mocaccino.agregarIngrediente(new Ingrediente(1, leche));
+            mocaccino.agregarIngrediente(new Ingrediente(1, chocolate));
 
 
 

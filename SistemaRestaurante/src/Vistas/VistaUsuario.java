@@ -321,7 +321,10 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
         // TODO add your handling code here:
         if (!evt.getValueIsAdjusting()) {
             Categoria seleccion = (Categoria) ListaCategorias.getSelectedValue();
-            cUsuario.cargarItems(seleccion.getNombre());
+            if (seleccion != null) {
+                cUsuario.cargarItems(seleccion.getNombre());
+            }
+
         }
     }//GEN-LAST:event_ListaCategoriasValueChanged
 
@@ -338,6 +341,10 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
     private void bConfirmarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfirmarPedidosActionPerformed
             cUsuario.confirmarServicio();
+             Categoria seleccion = (Categoria) ListaCategorias.getSelectedValue();
+             cUsuario.cargarItems(seleccion.getNombre());
+
+            
     }//GEN-LAST:event_bConfirmarPedidosActionPerformed
 
     private void bFinalizarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFinalizarServicioActionPerformed
