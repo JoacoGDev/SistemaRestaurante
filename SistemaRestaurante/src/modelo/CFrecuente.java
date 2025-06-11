@@ -1,19 +1,15 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+     * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+     * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package modelo;
 
 import java.util.ArrayList;
 
-/**
- *
- * @author joaco
- */
-public class CFrecuente extends TipoCliente{
+public class CFrecuente extends TipoCliente {
 
     private ArrayList<Item> cafes;
-    
+
     public CFrecuente(ArrayList<Item> cafes) {
         super("Frecuente");
         this.cafes = cafes;
@@ -21,19 +17,20 @@ public class CFrecuente extends TipoCliente{
 
     @Override
     public String descuento(ArrayList<Pedido> pedidos) {
-        String ret = "";
+        StringBuilder ret = new StringBuilder();
         double total = 0;
-        for (Pedido p : pedidos){
-            if (cafes.contains(p.getItems())){
-                ret += "Cafe invitacion - Beneficio: " + p.getPrecio();
-            }
-            else
-            {
-                total += p.getPrecio();
+
+        for (Pedido p : pedidos) {
+            Item item = p.getItems();
+            if (cafes.contains(item)) {
+                ret.append("Café invitación: ").append(item.getNombre())
+                        .append(" (").append(item.getPrecio()).append(")\n");
+            } else {
+                total += item.getPrecio();
             }
         }
-        ret += " - " + total;
-        return ret;
+
+        ret.append("Total a pagar: $").append(total);
+        return ret.toString();
     }
-    
 }

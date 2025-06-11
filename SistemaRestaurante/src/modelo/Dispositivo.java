@@ -46,8 +46,11 @@ public class Dispositivo {
 
     }
 
-    public ArrayList<Pedido> getPedidos() {
-        return servicio.getPedidos();
+    public ArrayList<Pedido> getPedidos() throws RestauranteException{
+        if(servicio == null){
+            throw new RestauranteException("Debes iniciar sesión");
+        }
+            return servicio.getPedidos();
     }
 
     public void borrarPedido(int ind) throws RestauranteException{
@@ -64,7 +67,10 @@ public class Dispositivo {
         this.servicio.confirmarServicio();
     }
 
-    public String finalizarServicio() {
+    public String finalizarServicio() throws RestauranteException{
+        if(cliente == null || servicio == null){
+            throw new RestauranteException("Debes iniciar sesión");
+        }
         TipoCliente tc = this.cliente.getTipoCliente();
         String ret = this.servicio.calcularPrecio(tc);
         return ret;

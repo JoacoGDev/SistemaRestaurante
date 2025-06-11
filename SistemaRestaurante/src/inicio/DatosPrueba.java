@@ -65,40 +65,9 @@ public class DatosPrueba {
             f.agregarCategoria(new Categoria("Vino"));
             f.agregarCategoria(new Categoria("Cafe"));
             
-            // Inicializar tipos de clientes y agregarlos junto a sus respectivos clientes
-// Se asume que `f.getItems("Cafe")` devuelve una lista de nombres o ítems de café
-// Lista de tipos de clientes disponibles
-            TipoCliente comun = new CComun();
-            TipoCliente casa = new CCasa();
-            TipoCliente frecuente = new CFrecuente(f.getItems("Cafe"));
-            TipoCliente preferencial = new CPreferencial();
-
-// Registrar tipos en el sistema
-            f.agregarTipoCliente(comun);
-            f.agregarTipoCliente(casa);
-            f.agregarTipoCliente(frecuente);
-            f.agregarTipoCliente(preferencial);
-
-// Crear clientes y asignarles su tipo correspondiente
-            f.agregarCliente(1, "1", "1", "Juan Paco Pedro De La Mar", comun);           // Común
-            f.agregarCliente(2, "2", "2", "Pedrito Pedrón", casa);                      // De la Casa
-            f.agregarCliente(3, "3", "3", "Andresitooo", frecuente);                    // Frecuente
-            f.agregarCliente(4, "4", "4", "Julian Mazza", preferencial);               // Preferencial
-
-// Agregar más clientes para testear mejor cada caso
-            f.agregarCliente(5, "5", "5", "Laura Común", new CComun());
-            f.agregarCliente(6, "6", "6", "Carlos Casa", new CCasa());
-            f.agregarCliente(7, "7", "7", "María Cafetera", new CFrecuente(f.getItems("Cafe")));
-            f.agregarCliente(8, "8", "8", "Tito Preferido", new CPreferencial());
-
-            
-            f.agregarGestores("Juan Carlos", "1", "1", f.obtenerUp("Cocina"));
-            f.agregarGestores("Pedro Pascal", "Pedrito", "PedroPedrin", f.obtenerUp("Cocina"));
-            f.agregarGestores("Carlo", "ElCarli", "Carlangas", f.obtenerUp("Cocina"));
-            f.agregarGestores("Agustin", "Agustin51", "ElFornais", f.obtenerUp("Cocina"));
+ 
             
             
-            // === Insumos ===
             Insumo panRallado = new Insumo("Pan rallado", 10, 50);
             Insumo pollo = new Insumo("Pollo", 5, 46);
             Insumo lechuga = new Insumo("Lechuga", 5, 70);
@@ -113,7 +82,7 @@ public class DatosPrueba {
             Insumo chocolate = new Insumo("Chocolate", 10, 120);
             Insumo gelatina = new Insumo("Gelatina sin sabor", 5, 30);
 
-// === Entrada ===
+
             Item alitas = new Item("Alitas de pollo", 300, f.obtenerUp("Cocina"));
             f.agregarItem("Entrada", alitas);
             alitas.agregarIngrediente(new Ingrediente(1, panRallado));
@@ -126,14 +95,14 @@ public class DatosPrueba {
             ensalada.agregarIngrediente(new Ingrediente(3, tomate));
             ensalada.agregarIngrediente(new Ingrediente(1, cebolla));
 
-// === Principal ===
+
             Item polloFrito = new Item("Pollo frito", 780, f.obtenerUp("Cocina"));
             f.agregarItem("Principal", polloFrito);
             polloFrito.agregarIngrediente(new Ingrediente(2, panRallado));
             polloFrito.agregarIngrediente(new Ingrediente(3, pollo));
             polloFrito.agregarIngrediente(new Ingrediente(2, aceite));
 
-// === Acompañamientos ===
+
             Item papasFritas = new Item("Papas fritas", 350, f.obtenerUp("Cocina"));
             f.agregarItem("Acompañamiento", papasFritas);
             papasFritas.agregarIngrediente(new Ingrediente(3, papa));
@@ -145,7 +114,7 @@ public class DatosPrueba {
             arosCebolla.agregarIngrediente(new Ingrediente(1, panRallado));
             arosCebolla.agregarIngrediente(new Ingrediente(1, huevo));
 
-// === Postres ===
+
             Item alitasChoco = new Item("Alitas de chocolate", 230, f.obtenerUp("Cocina"));
             f.agregarItem("Postre", alitasChoco);
             alitasChoco.agregarIngrediente(new Ingrediente(2, chocolate));
@@ -158,15 +127,15 @@ public class DatosPrueba {
             flan.agregarIngrediente(new Ingrediente(1, azucar));
             flan.agregarIngrediente(new Ingrediente(1, gelatina));
 
-// === Bebidas ===
+
             f.agregarItem("Bebida", new Item("Coca-Cola 1L", 170, f.obtenerUp("Bar")));
             f.agregarItem("Bebida", new Item("Agua mineral 700ml", 120, f.obtenerUp("Bar")));
 
-// === Vinos ===
+
             f.agregarItem("Vino", new Item("Faisán", 150, f.obtenerUp("Bar")));
             f.agregarItem("Vino", new Item("Santa Teresa", 130, f.obtenerUp("Bar")));
 
-// === Cafés ===
+
             Item cafeNegro = new Item("Café negro", 120, f.obtenerUp("Cafeteria"));
             f.agregarItem("Cafe", cafeNegro);
             cafeNegro.agregarIngrediente(new Ingrediente(1, cafeMolido));
@@ -181,7 +150,7 @@ public class DatosPrueba {
             capuchino.agregarIngrediente(new Ingrediente(1, leche));
             capuchino.agregarIngrediente(new Ingrediente(1, azucar));
 
-            // === Nuevos Insumos ===
+
             Insumo queso = new Insumo("Queso", 10, 110);
             Insumo jamon = new Insumo("Jamón", 10, 95);
             Insumo pan = new Insumo("Pan", 20, 80);
@@ -198,7 +167,7 @@ public class DatosPrueba {
             Insumo zanahoria = new Insumo("Zanahoria", 3, 34);
 
 
-// === Entradas ===
+
             Item bruschetta = new Item("Bruschetta de jamón y queso", 250, f.obtenerUp("Cocina"));
             f.agregarItem("Entrada", bruschetta);
             bruschetta.agregarIngrediente(new Ingrediente(1, pan));
@@ -211,7 +180,7 @@ public class DatosPrueba {
             sopaVerduras.agregarIngrediente(new Ingrediente(1, papa));
             sopaVerduras.agregarIngrediente(new Ingrediente(1, zanahoria));
 
-// === Principales ===
+
             Item hamburguesa = new Item("Hamburguesa completa", 850, f.obtenerUp("Cocina"));
             f.agregarItem("Principal", hamburguesa);
             hamburguesa.agregarIngrediente(new Ingrediente(1, pan));
@@ -226,14 +195,13 @@ public class DatosPrueba {
             arrozPollo.agregarIngrediente(new Ingrediente(2, pollo));
             arrozPollo.agregarIngrediente(new Ingrediente(1, cebolla));
 
-// === Acompañamientos ===
+
             Item purePapa = new Item("Puré de papa", 320, f.obtenerUp("Cocina"));
             f.agregarItem("Acompañamiento", purePapa);
             purePapa.agregarIngrediente(new Ingrediente(3, papa));
             purePapa.agregarIngrediente(new Ingrediente(1, leche));
             purePapa.agregarIngrediente(new Ingrediente(1, manteca));
 
-// === Postres ===
             Item mousseChocolate = new Item("Mousse de chocolate", 260, f.obtenerUp("Cocina"));
             f.agregarItem("Postre", mousseChocolate);
             mousseChocolate.agregarIngrediente(new Ingrediente(2, chocolate));
@@ -246,7 +214,6 @@ public class DatosPrueba {
             ensaladaFrutas.agregarIngrediente(new Ingrediente(2, manzana));
             ensaladaFrutas.agregarIngrediente(new Ingrediente(1, naranja));
 
-// === Bebidas ===
             Item limonada = new Item("Limonada fresca", 140, f.obtenerUp("Bar"));
             f.agregarItem("Bebida", limonada);
             limonada.agregarIngrediente(new Ingrediente(2, limon));
@@ -259,7 +226,6 @@ public class DatosPrueba {
             licuadoFrutilla.agregarIngrediente(new Ingrediente(1, leche));
             licuadoFrutilla.agregarIngrediente(new Ingrediente(1, azucar));
 
-// === Cafés ===
             Item latte = new Item("Latte", 150, f.obtenerUp("Cafeteria"));
             f.agregarItem("Cafe", latte);
             latte.agregarIngrediente(new Ingrediente(1, cafeMolido));
@@ -271,6 +237,39 @@ public class DatosPrueba {
             mocaccino.agregarIngrediente(new Ingrediente(1, leche));
             mocaccino.agregarIngrediente(new Ingrediente(1, chocolate));
 
+            
+            
+            
+            
+            TipoCliente comun = new CComun();
+            TipoCliente casa = new CCasa();
+            TipoCliente frecuente = new CFrecuente(f.getItems("Cafe"));
+            TipoCliente preferencial = new CPreferencial();
+
+
+            f.agregarTipoCliente(comun);
+            f.agregarTipoCliente(casa);
+            f.agregarTipoCliente(frecuente);
+            f.agregarTipoCliente(preferencial);
+
+
+            f.agregarCliente(1, "1", "1", "Juan Paco Pedro De La Mar", comun);          
+            f.agregarCliente(2, "2", "2", "Pedrito Pedrón", casa);                   
+            f.agregarCliente(3, "3", "3", "Andresitooo", frecuente);                 
+            f.agregarCliente(4, "4", "4", "Julian Mazza", preferencial);               
+
+// Agregar más clientes para testear mejor cada caso
+            f.agregarCliente(5, "5", "5", "Laura Común", comun);
+            f.agregarCliente(6, "6", "6", "Carlos Casa", casa);
+            f.agregarCliente(7, "7", "7", "María Cafetera", frecuente);
+            f.agregarCliente(8, "8", "8", "Tito Preferido", preferencial);
+
+            
+            f.agregarGestores("Juan Carlos", "1", "1", f.obtenerUp("Cocina"));
+            f.agregarGestores("Pedro Pascal", "Pedrito", "PedroPedrin", f.obtenerUp("Cocina"));
+            f.agregarGestores("Carlo", "ElCarli", "Carlangas", f.obtenerUp("Cocina"));
+            f.agregarGestores("Agustin", "Agustin51", "ElFornais", f.obtenerUp("Cocina"));
+            
 
 
         }

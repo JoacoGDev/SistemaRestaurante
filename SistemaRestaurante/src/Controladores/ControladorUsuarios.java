@@ -64,8 +64,13 @@ public class ControladorUsuarios {
     
     
     public void finalizarServicio(){
-        String totalServ = dispUsu.finalizarServicio();
-        vUsuario.mostrarMensaje(totalServ);
+        try{
+            String totalServ = dispUsu.finalizarServicio();
+            vUsuario.mostrarMensaje(totalServ);
+        }catch(RestauranteException ex){
+            vUsuario.mostrarMensaje(ex.getMessage());
+        }
+        
     }
 
     public void agregarPedidos(Item item, String comentario) {
@@ -103,8 +108,14 @@ public class ControladorUsuarios {
             vUsuario.actualizarTabla(dispUsu.getPedidos());
         }catch(RestauranteException ex){
             vUsuario.mostrarMensaje(ex.getMessage());
-            vUsuario.actualizarTabla(dispUsu.getPedidos());
+            try{
+                vUsuario.actualizarTabla(dispUsu.getPedidos());
+            }catch(RestauranteException ex2){
+                vUsuario.mostrarMensaje(ex2.getMessage());
+            }
+
         }
+         
     }
 
 }
