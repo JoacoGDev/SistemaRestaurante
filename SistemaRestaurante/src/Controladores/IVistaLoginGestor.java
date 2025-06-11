@@ -8,6 +8,10 @@ package Controladores;
  *
  * @author joaco
  */
-public class ControladorInicio {
+public interface IVistaLoginGestor {
+
+    public void mostrarMensaje(String message);
+    
+    public void mostrarVistaGestor();
     
 }

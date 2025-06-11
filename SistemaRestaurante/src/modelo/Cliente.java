@@ -17,6 +17,10 @@ public class Cliente extends Usuario {
     public int getNumeroCliente() {
         return numeroCliente;
     }
+    
+    public void desvincular(){
+        this.dispositivo = null;
+    }
 
     public TipoCliente getTipoCliente() {
         return tipoCliente;

@@ -236,10 +236,7 @@ public class DatosPrueba {
             mocaccino.agregarIngrediente(new Ingrediente(1, cafeMolido));
             mocaccino.agregarIngrediente(new Ingrediente(1, leche));
             mocaccino.agregarIngrediente(new Ingrediente(1, chocolate));
-
-            
-            
-            
+       
             
             TipoCliente comun = new CComun();
             TipoCliente casa = new CCasa();

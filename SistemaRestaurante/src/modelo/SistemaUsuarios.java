@@ -80,9 +80,32 @@ public class SistemaUsuarios {
         tiposCliente.add(tc);
     }
 
+    public Gestor loginGestor(String usuario, String pass) throws RestauranteException{
+       
+        Gestor usuarioGestor = buscarGestor(usuario); 
+        
+         if (usuarioGestor == null || !usuarioGestor.getPassword().equals(pass)) {
+            throw new RestauranteException("Credenciales incorrectas");
+        }
+         
+        if(usuarioGestor.isActivo()){
+            throw new RestauranteException("Acceso denegado. El usuario ya está logueado");
+        }
+        
+        usuarioGestor.setActivo(true);
+        return usuarioGestor;
+    }
+
  
-    
-    
+    private Gestor buscarGestor(String usuario) {
+        for (Gestor g : gestores) {
+            if (g.getUsuario().equals(usuario)) {
+                return g;
+            }
+        }
+        return null;
+    }
+
     
     
 }

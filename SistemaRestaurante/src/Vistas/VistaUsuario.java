@@ -349,7 +349,8 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
     private void bFinalizarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFinalizarServicioActionPerformed
         new VistaConfirmar(this, false).setVisible(true);
-        cUsuario.finalizarServicio();    
+        cUsuario.finalizarServicio();
+        
     }//GEN-LAST:event_bFinalizarServicioActionPerformed
 
     

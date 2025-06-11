@@ -65,8 +65,10 @@ public class ControladorUsuarios {
     
     public void finalizarServicio(){
         try{
+  
             String totalServ = dispUsu.finalizarServicio();
             vUsuario.mostrarMensaje(totalServ);
+            
         }catch(RestauranteException ex){
             vUsuario.mostrarMensaje(ex.getMessage());
         }

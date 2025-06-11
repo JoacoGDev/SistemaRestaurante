@@ -22,6 +22,7 @@ public class Dispositivo {
         return cliente;
     }
     
+    
      public boolean isDisponible() {
         return cliente == null;
     }
@@ -66,6 +67,11 @@ public class Dispositivo {
         }
         this.servicio.confirmarServicio();
     }
+    
+    public void desvincularUsuario(){
+        this.getCliente().desvincular();
+        this.cliente = null;
+    }
 
     public String finalizarServicio() throws RestauranteException{
         if(cliente == null || servicio == null){
@@ -73,8 +79,8 @@ public class Dispositivo {
         }
         TipoCliente tc = this.cliente.getTipoCliente();
         String ret = this.servicio.calcularPrecio(tc);
+        desvincularUsuario();
         return ret;
     }
-    
-    
+
 }
