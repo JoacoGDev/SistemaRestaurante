@@ -80,4 +80,12 @@ public class Pedido {
             throw new RestauranteException("Debes seleccionar un Item");
         }
     }
+
+    public boolean noConfirmado() {
+        return this.getEstado() == EstadoPedido.NOCONFIRMADO;
+    }
+
+    public void modificarStock() throws RestauranteException{
+        item.modificarStock();
+    }
 }

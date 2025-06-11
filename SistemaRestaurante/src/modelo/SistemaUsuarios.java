@@ -32,8 +32,10 @@ public class SistemaUsuarios {
                 throw new RestauranteException("El Gestor ya está registrado");
             }
         }
+        
+        //String nombreUsuario, String nombreCompleto, String password)
     
-        Gestor nuevoGestor = new Gestor(nombreCompleto, password, nombreCompleto);
+        Gestor nuevoGestor = new Gestor(nombreUsuario, nombreCompleto, password, up);
         gestores.add(nuevoGestor);
     }
 

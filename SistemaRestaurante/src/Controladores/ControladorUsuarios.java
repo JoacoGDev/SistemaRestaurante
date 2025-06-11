@@ -65,10 +65,10 @@ public class ControladorUsuarios {
     
     public void finalizarServicio(){
         try{
-  
-            String totalServ = dispUsu.finalizarServicio();
-            vUsuario.mostrarMensaje(totalServ);
             
+            String totalServ = dispUsu.finalizarServicio();
+            vUsuario.mostrarConfirmar();
+            vUsuario.mostrarMensaje(totalServ);
         }catch(RestauranteException ex){
             vUsuario.mostrarMensaje(ex.getMessage());
         }
@@ -106,7 +106,7 @@ public class ControladorUsuarios {
     public void confirmarServicio() {
         
         try{
-            dispUsu.confirmarServicio();
+            vUsuario.mostrarMensaje(dispUsu.confirmarServicio());
             vUsuario.actualizarTabla(dispUsu.getPedidos());
         }catch(RestauranteException ex){
             vUsuario.mostrarMensaje(ex.getMessage());

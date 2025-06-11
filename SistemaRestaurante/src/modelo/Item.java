@@ -95,6 +95,12 @@ public class Item {
         return this.nombre.equals(o.nombre);
     }
 
+    void modificarStock() throws RestauranteException{
+        for(Ingrediente i: ingredientes){
+            i.descontarStock();
+         }
+    }
+
     
 
 }

@@ -32,7 +32,7 @@ public class VistaLoginGestor extends javax.swing.JFrame implements IVistaLoginG
         jButton1 = new javax.swing.JButton();
         MensajeSistema = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jScrollPane1.setViewportView(textUsuario);
 

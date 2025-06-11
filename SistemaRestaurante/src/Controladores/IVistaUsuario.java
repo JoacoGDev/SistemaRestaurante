@@ -27,6 +27,8 @@ public interface IVistaUsuario {
     public void cargarPedido(Pedido p);
     
     public void actualizarTabla(ArrayList<Pedido> pedidos);
+    
+    public void mostrarConfirmar();
          
      
     

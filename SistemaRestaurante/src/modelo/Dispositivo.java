@@ -61,11 +61,11 @@ public class Dispositivo {
         this.servicio.borrarPedido(ind);
     }
 
-    public void confirmarServicio() throws RestauranteException {
+    public String confirmarServicio() throws RestauranteException {
         if(this.servicio == null){
             throw new RestauranteException("Debes iniciar sesión");
         }
-        this.servicio.confirmarServicio();
+        return this.servicio.confirmarServicio();
     }
     
     public void desvincularUsuario(){
