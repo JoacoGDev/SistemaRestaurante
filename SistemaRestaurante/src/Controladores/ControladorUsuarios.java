@@ -12,8 +12,11 @@ import modelo.Item;
 import modelo.Menu;
 import modelo.Pedido;
 import modelo.RestauranteException;
+import modelo.Servicio;
+import observador.Observable;
+import observador.Observador;
 
-public class ControladorUsuarios {
+public class ControladorUsuarios implements Observador {
 
     //private VistaUsuario vistaLogin;
     private Fachada f = Fachada.getInstancia();
@@ -29,6 +32,7 @@ public class ControladorUsuarios {
     public void loginUsuario(int numeroCliente, String password){
         try{
             Cliente clienteLogueado = f.loginCliente(numeroCliente, password, dispUsu);
+            dispUsu.agregarObservador(this);
             vUsuario.MostrarUsuario(clienteLogueado.getNombreCompleto());
             vUsuario.mostrarMensaje("Mensajes de Sistema");
          
@@ -64,6 +68,7 @@ public class ControladorUsuarios {
             String totalServ = dispUsu.finalizarServicio();
             vUsuario.mostrarConfirmar();
             vUsuario.mostrarMensaje(totalServ);
+            dispUsu.quitarObservador(this);
             
         }catch(RestauranteException ex){
             vUsuario.mostrarMensaje(ex.getMessage());
@@ -75,7 +80,6 @@ public class ControladorUsuarios {
         //itemSeleccionado es un String. Tengo que obtener el objeto item y agregarlo a un pedido
         try{
             Pedido pedidoAAgregar = f.agregarPedido(item, comentario, this.dispUsu);
-            cargarPedidos(pedidoAAgregar);
         }catch(RestauranteException ex){
             vUsuario.mostrarMensaje(ex.getMessage());
         }
@@ -83,10 +87,6 @@ public class ControladorUsuarios {
     
     }
     
-    public void cargarPedidos(Pedido pedidoAAgregar){
-     
-        vUsuario.cargarPedido(pedidoAAgregar);
-    }
 
     public void borrarPedido(int ind){
        try{
@@ -102,19 +102,23 @@ public class ControladorUsuarios {
     public void confirmarServicio() {
         
         try{
- 
-          vUsuario.mostrarMensaje(dispUsu.confirmarServicio());
-            vUsuario.actualizarTabla(dispUsu.getPedidos());
+            vUsuario.mostrarMensaje(dispUsu.confirmarServicio());
         }catch(RestauranteException ex){
             vUsuario.mostrarMensaje(ex.getMessage());
-            try{
-                vUsuario.actualizarTabla(dispUsu.getPedidos());
-            }catch(RestauranteException ex2){
-                vUsuario.mostrarMensaje(ex2.getMessage());
-            }
-
         }
          
+    }
+    
+     @Override
+    public void actualizar(Object evento, Observable origen) {
+        try{
+            if(evento.equals(Servicio.eventos.cambioListaPedidos)){
+                vUsuario.actualizarTabla(dispUsu.getPedidos());
+            }
+        }
+        catch (RestauranteException ex){
+            vUsuario.mostrarMensaje(ex.getMessage());
+        }
     }
 
 }

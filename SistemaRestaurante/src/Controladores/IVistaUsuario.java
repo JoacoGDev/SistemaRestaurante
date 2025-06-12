@@ -23,8 +23,6 @@ public interface IVistaUsuario {
     public void cargarCategorias(ArrayList<Categoria> categorias);
 
     public void cargarItems(ArrayList<Item> items);
-
-    public void cargarPedido(Pedido p);
     
     public void actualizarTabla(ArrayList<Pedido> pedidos);
     

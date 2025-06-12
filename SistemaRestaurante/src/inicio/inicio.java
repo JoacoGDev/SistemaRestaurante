@@ -1,13 +1,13 @@
 package inicio;
 
-import Vistas.VistaDev;
+import Vistas.VistaInicio;
 import inicio.DatosPrueba;
 
-public class Inicio {
+public class inicio {
 
     public static void main(String[] args) {
-        VistaDev vd = new VistaDev();
-        vd.setVisible(true);
+        VistaInicio vi = new VistaInicio();
+        vi.setVisible(true);
         DatosPrueba.cargar();
     }
     

@@ -1,5 +1,6 @@
 package modelo;
 
+import Controladores.ControladorUsuarios;
 import java.util.ArrayList;
 
 public class Dispositivo {
@@ -82,6 +83,15 @@ public class Dispositivo {
         String ret = this.servicio.calcularPrecio(tc);
         desvincularUsuario();
         return ret;
+    }
+
+    public void agregarObservador(ControladorUsuarios aThis) {
+        servicio.agregarObservador(aThis);
+    }
+
+
+    public void quitarObservador(ControladorUsuarios aThis) {
+        servicio.quitarObservador(aThis);
     }
 
 }

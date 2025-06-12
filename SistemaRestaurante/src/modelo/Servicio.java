@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import observador.Observable;
 
 public class Servicio extends Observable{
-
-    
     
     public enum eventos{cambioListaPedidos};
     
@@ -44,6 +42,8 @@ public class Servicio extends Observable{
             }
             p.reintegrarStock();
             pedidos.remove(ind);
+            p.borrarPedidoUp();
+            avisar(eventos.cambioListaPedidos);
         }else{
             throw new RestauranteException("Debes seleccionar un pedido");
         }
@@ -71,6 +71,7 @@ public class Servicio extends Observable{
             if(p.isDisponible()){
                     p.setEstado(EstadoPedido.CONFIRMADO);
                     p.modificarStock();
+                    p.agregarPedidoUp();
                 }
                 else{
                     sinStock.add(p);
@@ -83,10 +84,10 @@ public class Servicio extends Observable{
                 ret += " - " + p.getNombre();
                 pedidos.remove(p);
             }
-            ret += " y no pudimos avisarte antes!";
+            ret += " - y no pudimos avisarte antes!";
         }
         
-        
+        avisar(eventos.cambioListaPedidos);
         return ret;
 /*
         if (pedidos == null || pedidos.isEmpty()) {

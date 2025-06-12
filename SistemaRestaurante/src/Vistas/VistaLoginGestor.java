@@ -6,6 +6,7 @@ package Vistas;
 
 import Controladores.ControladorLoginGestor;
 import Controladores.IVistaLoginGestor;
+import modelo.Gestor;
 
 /**
  *
@@ -119,7 +120,7 @@ public class VistaLoginGestor extends javax.swing.JFrame implements IVistaLoginG
     }
 
     @Override
-    public void mostrarVistaGestor() {
-        new VistaGestor().setVisible(true);
+    public void mostrarVistaGestor(Gestor g) {
+        new VistaGestor(g).setVisible(true);
     }
 }

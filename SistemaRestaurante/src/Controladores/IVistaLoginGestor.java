@@ -4,6 +4,8 @@
  */
 package Controladores;
 
+import modelo.Gestor;
+
 /**
  *
  * @author joaco
@@ -12,6 +14,6 @@ public interface IVistaLoginGestor {
 
     public void mostrarMensaje(String message);
     
-    public void mostrarVistaGestor();
+    public void mostrarVistaGestor(Gestor g);
     
 }

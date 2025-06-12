@@ -1,8 +1,12 @@
 package modelo;
 
 import java.util.ArrayList;
+import observador.Observable;
 
-public class Pedido {
+public class Pedido extends Observable{
+    
+    public enum eventos {cambioPedido};
+    
     private Item item;
     private String comentario;
     private EstadoPedido estado;
@@ -48,6 +52,7 @@ public class Pedido {
 
     public void setGestor(Gestor gestor) {
         this.gestor = gestor;
+        avisar(eventos.cambioPedido);
     }
     
     public double getPrecio(){
@@ -60,10 +65,7 @@ public class Pedido {
     
     @Override
     public String toString() {
-        return "Item: " + item.getNombre() + 
-           ", Estado: " + estado + 
-           ", Comentario: " + comentario + 
-           ", Gestor: " + gestor.getNombre();
+        return item.getNombre() + comentario;
 }
 
     public boolean isDisponible() {
@@ -88,4 +90,14 @@ public class Pedido {
     public void modificarStock() throws RestauranteException{
         item.modificarStock();
     }
+
+    void agregarPedidoUp() {
+        this.item.agregarPedidoUp(this);
+    }
+
+    public void borrarPedidoUp() {
+        item.borrarPedidoUp(this);
+    }
+    
+    
 }

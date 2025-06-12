@@ -4,10 +4,15 @@
  */
 package Controladores;
 
+import java.util.ArrayList;
+import modelo.Pedido;
+
 /**
  *
  * @author joaco
  */
 public interface IVistaGestor {
+    
+    public void cargarPedidos(ArrayList<Pedido> pedidos);
     
 }

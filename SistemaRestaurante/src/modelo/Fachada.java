@@ -87,9 +87,10 @@ public class Fachada {
         sUsuario.agregarTipoCliente(tc);
     }
 
-    public void loginGestor(String usuario, String pass) throws RestauranteException{
-        sUsuario.loginGestor(usuario, pass);
+    public Gestor loginGestor(String usuario, String pass) throws RestauranteException{
+        return sUsuario.loginGestor(usuario, pass);
     }
+
     
 
 }

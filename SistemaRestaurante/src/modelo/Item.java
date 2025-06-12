@@ -5,12 +5,15 @@ import java.util.Objects;
 
 public class Item {
 
+    private static int contadorId = 0;
+    private int id;
     private String nombre;
     private double precio;
     private ArrayList<Ingrediente> ingredientes = new ArrayList();
     private UnidadProcesadora unidadProcesadora;
 
     public Item(String nombre, double precio, UnidadProcesadora unidadProcesadora) {
+        id = contadorId++;
         this.nombre = nombre;
         this.precio = precio;
         this.unidadProcesadora = unidadProcesadora;
@@ -101,6 +104,30 @@ public class Item {
          }
     }
 
+    void agregarPedidoUp(Pedido pedidoAAgregar) {
+        this.unidadProcesadora.agregarPedido(pedidoAAgregar);
+    }
+
+    void borrarPedidoUp(Pedido p) {
+        unidadProcesadora.borrarPedido(p);
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Item other = (Item) obj;
+        return this.id == other.id;
+    }
+    
+    
     
 
 }

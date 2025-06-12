@@ -1,13 +1,16 @@
 package modelo;
 
 import java.util.ArrayList;
+import observador.Observable;
 
-public class UnidadProcesadora {
+public class UnidadProcesadora extends Observable{
 
     
 
+    public enum eventos{cambioListaPedidosUp};
+    
     private String nombre;
-    private ArrayList<Gestor> gestores = new ArrayList();
+    private ArrayList<Pedido> pedidos = new ArrayList();
 
     public UnidadProcesadora(String nombre) {
         this.nombre = nombre;
@@ -21,8 +24,20 @@ public class UnidadProcesadora {
         this.nombre = nombre;
     }
 
-    public ArrayList<Gestor> getGestores() {
-        return gestores;
+    public ArrayList<Pedido> getPedidos() {
+        return pedidos;
     }
+    
+    public void agregarPedido(Pedido p){
+        pedidos.add(p);
+        avisar(eventos.cambioListaPedidosUp);
+    }
+    
+    void borrarPedido(Pedido p) {
+        pedidos.remove(p);
+        avisar(eventos.cambioListaPedidosUp);
+    }
+    
+    
     
 }

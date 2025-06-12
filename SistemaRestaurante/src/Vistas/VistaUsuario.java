@@ -324,19 +324,11 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
         }
     }//GEN-LAST:event_ListaCategoriasValueChanged
-
-    
  
-    
-    
     private void bEliminarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarPedidoActionPerformed
 
         int ind = jtPedidos.getSelectedRow();
-        cUsuario.borrarPedido(ind);
-        if(ind != -1){
-            DefaultTableModel m = (DefaultTableModel)jtPedidos.getModel();
-            m.removeRow(ind);
-        }          
+        cUsuario.borrarPedido(ind);        
     }//GEN-LAST:event_bEliminarPedidoActionPerformed
 
     private void bConfirmarPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bConfirmarPedidosActionPerformed
@@ -412,33 +404,26 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
         listaItems.setListData(items.toArray());
     }
 
+ 
     @Override
-
-    public void cargarPedido(Pedido p) {
-        
+    public void actualizarTabla(ArrayList<Pedido> pedidos){
         DefaultTableModel m = (DefaultTableModel) jtPedidos.getModel();
-        Item i = p.getItems();
+        m.setRowCount(0);
+        for (Pedido p: pedidos){
+            Item i = p.getItems();
 
-        m.addRow(new Object[] {
-            i != null ? i.getNombre() : "Sin item",
-            p.getComentario() != null ? p.getComentario() : "Sin comentario",
-            p.getEstado() != null ? p.getEstado().toString() : "Sin estado",
-            (i != null && i.getUnidadProcesadora() != null) ? i.getUnidadProcesadora().getNombre() : "Sin unidad procesadora",
-            (p.getGestor() != null) ? p.getGestor().getNombre() : "Sin gestor",
-            (i != null) ? i.getPrecio() : 0.0
-    });
+            m.addRow(new Object[] {
+                i != null ? i.getNombre() : "Sin item",
+                p.getComentario() != null ? p.getComentario() : "Sin comentario",
+                p.getEstado() != null ? p.getEstado().toString() : "Sin estado",
+                (i != null && i.getUnidadProcesadora() != null) ? i.getUnidadProcesadora().getNombre() : "Sin unidad procesadora",
+                (p.getGestor() != null) ? p.getGestor().getNombre() : "Sin gestor",
+                (i != null) ? i.getPrecio() : 0.0
+            });
 
-
+        }
     }
     
-    @Override
-     public void actualizarTabla(ArrayList<Pedido> pedidos){
-         DefaultTableModel m = (DefaultTableModel)jtPedidos.getModel();
-            m.setRowCount(0);
-         for(Pedido p: pedidos){     
-             cargarPedido(p);
-         }
-     }
      
     @Override
     public void mostrarConfirmar(){

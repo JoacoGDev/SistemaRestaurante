@@ -1,5 +1,8 @@
 package modelo;
 
+import Controladores.ControladorGestores;
+import java.util.ArrayList;
+
 public class Gestor extends Usuario{
 
 
@@ -28,6 +31,19 @@ public class Gestor extends Usuario{
 
     public UnidadProcesadora getUp() {
         return up;
+    }
+    
+    
+    public ArrayList<Pedido> obtenerPedidosUp(){
+        return up.getPedidos();
+    }
+
+    public void agregarObs(ControladorGestores aThis) {
+        up.agregarObservador(aThis);
+    }
+
+    public void tomarPedido(Pedido p) {
+        p.setGestor(this);
     }
     
     

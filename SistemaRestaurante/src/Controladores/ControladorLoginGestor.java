@@ -25,8 +25,8 @@ public class ControladorLoginGestor {
 
     public void loginGestor(String usuario, String pass) {
      try{
-           f.loginGestor(usuario, pass);
-           vLoginGestor.mostrarVistaGestor();
+           Gestor g = f.loginGestor(usuario, pass);
+           vLoginGestor.mostrarVistaGestor(g);
      }catch(RestauranteException ex){
             vLoginGestor.mostrarMensaje(ex.getMessage());
      }
