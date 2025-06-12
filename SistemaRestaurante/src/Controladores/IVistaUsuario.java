@@ -29,6 +29,8 @@ public interface IVistaUsuario {
     public void actualizarTabla(ArrayList<Pedido> pedidos);
     
     public void mostrarConfirmar();
+    
+    public void limpiarCampos();
          
      
     

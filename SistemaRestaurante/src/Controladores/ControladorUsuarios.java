@@ -38,15 +38,10 @@ public class ControladorUsuarios {
     }
     
     public void cargar(Cliente cli){
-        actualizarNombre();
-        cargarMenu();
-        
+        cargarMenu();        
     }
     
-    private void actualizarNombre() {
-        
-    }
-
+  
     private void cargarMenu() {
         cargarCategorias();
     }
@@ -69,6 +64,7 @@ public class ControladorUsuarios {
             String totalServ = dispUsu.finalizarServicio();
             vUsuario.mostrarConfirmar();
             vUsuario.mostrarMensaje(totalServ);
+            
         }catch(RestauranteException ex){
             vUsuario.mostrarMensaje(ex.getMessage());
         }
@@ -106,7 +102,8 @@ public class ControladorUsuarios {
     public void confirmarServicio() {
         
         try{
-            vUsuario.mostrarMensaje(dispUsu.confirmarServicio());
+ 
+          vUsuario.mostrarMensaje(dispUsu.confirmarServicio());
             vUsuario.actualizarTabla(dispUsu.getPedidos());
         }catch(RestauranteException ex){
             vUsuario.mostrarMensaje(ex.getMessage());

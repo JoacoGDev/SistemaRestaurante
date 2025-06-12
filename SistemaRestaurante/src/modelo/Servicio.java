@@ -83,8 +83,9 @@ public class Servicio extends Observable{
                 ret += " - " + p.getNombre();
                 pedidos.remove(p);
             }
+            ret += " y no pudimos avisarte antes!";
         }
-        ret += " y no pudimos avisarte antes!";
+        
         
         return ret;
 /*

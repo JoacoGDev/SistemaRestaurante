@@ -71,6 +71,7 @@ public class Dispositivo {
     public void desvincularUsuario(){
         this.getCliente().desvincular();
         this.cliente = null;
+        this.servicio = null;
     }
 
     public String finalizarServicio() throws RestauranteException{

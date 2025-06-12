@@ -7,6 +7,7 @@ package Vistas;
 import Controladores.ControladorUsuarios;
 import Controladores.IVistaUsuario;
 import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Categoria;
@@ -324,6 +325,10 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
         }
     }//GEN-LAST:event_ListaCategoriasValueChanged
 
+    
+ 
+    
+    
     private void bEliminarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEliminarPedidoActionPerformed
 
         int ind = jtPedidos.getSelectedRow();
@@ -341,7 +346,8 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     }//GEN-LAST:event_bConfirmarPedidosActionPerformed
 
     private void bFinalizarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFinalizarServicioActionPerformed
-        cUsuario.finalizarServicio();
+         cUsuario.finalizarServicio();
+         limpiarCampos();
     }//GEN-LAST:event_bFinalizarServicioActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -438,9 +444,26 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     public void mostrarConfirmar(){
         new VistaConfirmar(this, false).setVisible(true);
     }
-    
+
+    @Override
+    public void limpiarCampos() {
+        tfNombreUsuario.setText("");
+        tfContrasena.setText("");
+        areaComentario.setText("");
+        ListaCategorias.clearSelection();
+        listaItems.clearSelection();
+        setTitle("");
+
+        DefaultTableModel nuevoModelo = new DefaultTableModel(
+                new Object[][]{}, // sin filas
+                new String[]{"Producto", "Cantidad", "Precio"} // tus columnas
+        );
+
+        jtPedidos.setModel(nuevoModelo);
+
+    }
+
 }
-    
     
     
 
