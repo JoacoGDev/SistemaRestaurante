@@ -14,5 +14,6 @@ import modelo.Pedido;
 public interface IVistaGestor {
     
     public void cargarPedidos(ArrayList<Pedido> pedidos);
+    public void cargarTablaPedidos(ArrayList<Pedido> pedidos);
     
 }

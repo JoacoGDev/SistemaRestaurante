@@ -389,15 +389,6 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     public void cargarCategorias(ArrayList<Categoria> categorias) {
         ListaCategorias.setListData(categorias.toArray());
     }
-//    
-//    @Override
-//    public void cargarItems(ArrayList<Item> is){
-//        ArrayList<String> listado = new ArrayList();
-//        for(Item i: is){
-//            listado.add(i.getNombre());
-//        }
-//        listaItems.setListData(listado.toArray());
-//    }
               
     @Override
     public void cargarItems(ArrayList<Item> items){

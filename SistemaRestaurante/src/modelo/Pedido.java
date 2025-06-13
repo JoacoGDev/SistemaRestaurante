@@ -1,10 +1,8 @@
 package modelo;
 
-import java.util.ArrayList;
+
 import modelo.Estados.EstadoNoConfirmado;
 import modelo.Estados.EstadoPedidos;
-import observador.Observable;
-import observador.Observador;
 
 public class Pedido {
     
@@ -67,7 +65,7 @@ public class Pedido {
 
     public void setGestor(Gestor gestor) {
         this.gestor = gestor;
-        avisar(eventos.cambioPedido);
+        this.servicio.avisar(eventos.cambioPedido);
     }
     
     public double getPrecio(){

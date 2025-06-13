@@ -7,7 +7,9 @@ package Vistas;
 import Controladores.ControladorGestores;
 import Controladores.IVistaGestor;
 import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
 import modelo.Gestor;
+import modelo.Item;
 import modelo.Pedido;
 
 /**
@@ -34,7 +36,7 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
         bTomarPedido = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jTablaPedidos = new javax.swing.JTable();
         bFinalizarPedido = new javax.swing.JButton();
         bEntregarPedido = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
@@ -76,7 +78,7 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTablaPedidos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -84,9 +86,14 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
                 "Nombre de Item", "Descripción", "Cliente", "Fecha y Hora", "Estado"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(jTablaPedidos);
 
         bFinalizarPedido.setText("Finalizar Pedido");
+        bFinalizarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bFinalizarPedidoActionPerformed(evt);
+            }
+        });
 
         bEntregarPedido.setText("Entregar Pedido");
 
@@ -150,6 +157,11 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
         cGestor.tomarPedido(pedidoSeleccionado);
     }//GEN-LAST:event_bTomarPedidoActionPerformed
 
+    private void bFinalizarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFinalizarPedidoActionPerformed
+        int ind = jTablaPedidos.getSelectedRow();
+        //cGestor.finalizarPedido(ind);     
+    }//GEN-LAST:event_bFinalizarPedidoActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bEntregarPedido;
@@ -161,12 +173,31 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTablaPedidos;
     // End of variables declaration//GEN-END:variables
 
     @Override
     public void cargarPedidos(ArrayList<Pedido> pedidos){
         jListaPedidos.setListData(pedidos.toArray());
+    }
+    
+    @Override
+    public void cargarTablaPedidos(ArrayList<Pedido> pedidos){
+        /*DefaultTableModel m = (DefaultTableModel) jtPedidos.getModel();
+        m.setRowCount(0);
+        for (Pedido p: pedidos){
+            Item i = p.getItems();
+
+            m.addRow(new Object[] {
+                i != null ? i.getNombre() : "Sin item",
+                p.getComentario() != null ? p.getComentario() : "Sin comentario",
+                p.getEstado() != null ? p.getEstado().toString() : "Sin estado",
+                (i != null && i.getUnidadProcesadora() != null) ? i.getUnidadProcesadora().getNombre() : "Sin unidad procesadora",
+                (p.getGestor() != null) ? p.getGestor().getNombre() : "Sin gestor",
+                (i != null) ? i.getPrecio() : 0.0
+            });
+
+        }*/
     }
 
 

@@ -9,6 +9,7 @@ public class Gestor extends Usuario{
     private String nombreUsuario;
     private UnidadProcesadora up;
     private boolean activo;
+    private ArrayList<Pedido> pedidosTomados = new ArrayList<Pedido>();
 
     public Gestor(String nombreUsuario, String nombreCompleto, String password, UnidadProcesadora up) {
         super(nombreCompleto, password);

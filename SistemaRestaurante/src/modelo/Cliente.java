@@ -12,6 +12,7 @@ public class Cliente extends Usuario {
         this.tipoCliente = tipoCliente;
         this.dispositivo = null;
     }
+    
 
 
     public int getNumeroCliente() {

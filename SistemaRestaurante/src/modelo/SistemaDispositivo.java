@@ -26,6 +26,7 @@ public class SistemaDispositivo {
     public Dispositivo getDispositivoDisponible() {
         for(Dispositivo d: dispositivos){
             if(d.isDisponible()){
+                d.setDisponible(false);
                 return d;
             }
         }

@@ -8,11 +8,13 @@ public class Dispositivo {
     private int id;
     private Cliente cliente;
     private Servicio servicio;
+    private boolean disponible;
 
     
     public Dispositivo() {
         this.id  = ++ contadorId;
         this.cliente = null;
+        disponible = true;
     }
 
     public int getId() {
@@ -25,7 +27,7 @@ public class Dispositivo {
     
     
      public boolean isDisponible() {
-        return cliente == null;
+        return disponible;
     }
 
     public void setCliente(Cliente cliente) {
@@ -93,6 +95,10 @@ public class Dispositivo {
 
     public void quitarObservador(ControladorUsuarios aThis) {
         servicio.quitarObservador(aThis);
+    }
+
+    void setDisponible(boolean a) {
+        disponible = a;
     }
 
 }

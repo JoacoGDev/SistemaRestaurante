@@ -17,6 +17,7 @@ public abstract class Usuario {
         this.nombreCompleto = nombreCompleto;
         this.password = password;
     }
+    
 
     public String getNombreCompleto() {
         return nombreCompleto;

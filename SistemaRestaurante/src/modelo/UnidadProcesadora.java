@@ -28,6 +28,7 @@ public class UnidadProcesadora extends Observable{
         return pedidos;
     }
     
+    
     public void agregarPedido(Pedido p){
         pedidos.add(p);
         avisar(eventos.cambioListaPedidosUp);
