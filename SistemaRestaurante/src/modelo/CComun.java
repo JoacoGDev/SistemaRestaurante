@@ -16,5 +16,4 @@ public class CComun extends TipoCliente {
         }        
         return String.valueOf(total);
     }
-    
 }

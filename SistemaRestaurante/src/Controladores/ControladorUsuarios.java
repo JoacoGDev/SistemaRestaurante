@@ -64,11 +64,11 @@ public class ControladorUsuarios implements Observador {
     
     public void finalizarServicio(){
         try{
-            
+            dispUsu.quitarObservador(this);    
             String totalServ = dispUsu.finalizarServicio();
             vUsuario.mostrarConfirmar();
             vUsuario.mostrarMensaje(totalServ);
-            dispUsu.quitarObservador(this);
+            
             
         }catch(RestauranteException ex){
             vUsuario.mostrarMensaje(ex.getMessage());

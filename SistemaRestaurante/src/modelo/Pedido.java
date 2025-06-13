@@ -1,24 +1,34 @@
 package modelo;
 
 import java.util.ArrayList;
+import modelo.Estados.EstadoNoConfirmado;
+import modelo.Estados.EstadoPedidos;
 import observador.Observable;
+import observador.Observador;
 
-public class Pedido extends Observable{
+public class Pedido {
     
     public enum eventos {cambioPedido};
     
+    public enum EstadoPedido {noConfirmado, confirmado, enProceso, finalizado, entregado};
+
+    
     private Item item;
     private String comentario;
-    private EstadoPedido estado;
+    private EstadoPedidos estado;
     private Gestor gestor;
-    
-
+    private Servicio servicio;
+   
     public Pedido(Item item, String comentario) {
         this.item = item;
         this.comentario = comentario;
-        this.estado = EstadoPedido.NOCONFIRMADO;
+        this.estado = new EstadoNoConfirmado(this);
     }
 
+    public EstadoPedido getEstado(){
+        return estado.getEstado();
+    }
+    
     public Item getItems() {
         return item;
     }
@@ -31,21 +41,26 @@ public class Pedido extends Observable{
         this.comentario = comentario;
     }
 
-    public EstadoPedido getEstado() {
-        return estado;
+    public void confirmarPedido() throws RestauranteException{
+        this.estado.confirmar();
     }
 
-    public void setEstado(EstadoPedido estado) {
-        this.estado = estado;
+    public void procesarPedido() throws RestauranteException{
+        this.estado.procesar();
     }
     
-    public void confirmarPedido() throws RestauranteException{
-
-        item.descontarStock();
-        this.setEstado(EstadoPedido.CONFIRMADO);
-     
+    public void finalizarPedido() throws RestauranteException{
+        this.estado.finalizar();
     }
-
+    
+    public void entregarPedido() throws RestauranteException{
+        this.estado.entregar();
+    }
+     
+    public void cambiarEstado(EstadoPedidos estadoNuevo){
+        this.estado = estadoNuevo;
+    }
+    
     public Gestor getGestor() {
         return gestor;
     }
@@ -84,7 +99,7 @@ public class Pedido extends Observable{
     }
 
     public boolean noConfirmado() {
-        return this.getEstado() == EstadoPedido.NOCONFIRMADO;
+        return this.estado.getEstado() == EstadoPedido.noConfirmado;
     }
 
     public void modificarStock() throws RestauranteException{
@@ -98,6 +113,8 @@ public class Pedido extends Observable{
     public void borrarPedidoUp() {
         item.borrarPedidoUp(this);
     }
+    
+    
     
     
 }

@@ -1,12 +1,15 @@
 package modelo;
 
 import java.util.ArrayList;
+import modelo.Pedido.EstadoPedido;
 import observador.Observable;
+import observador.Observador;
 
 public class Servicio extends Observable{
     
     public enum eventos{cambioListaPedidos};
     
+    private ArrayList<Observador> observadores = new ArrayList();
     private ArrayList<Pedido> pedidos = new ArrayList<>();
     private double montoTotal;
 
@@ -37,7 +40,7 @@ public class Servicio extends Observable{
     public void borrarPedido(int ind) throws RestauranteException {
         if (ind != -1) {
             Pedido p = pedidos.get(ind);
-            if (p.getEstado().equals(EstadoPedido.ENPROCESO)) {
+            if (p.getEstado().equals(EstadoPedido.enProceso)) {
                 throw new RestauranteException("Un poco tarde...Ya estamos elaborando este pedido");
             }
             p.reintegrarStock();
@@ -69,7 +72,7 @@ public class Servicio extends Observable{
         
         for(Pedido p : aConfirmar){
             if(p.isDisponible()){
-                    p.setEstado(EstadoPedido.CONFIRMADO);
+                    p.confirmarPedido();
                     p.modificarStock();
                     p.agregarPedidoUp();
                 }
@@ -89,42 +92,28 @@ public class Servicio extends Observable{
         
         avisar(eventos.cambioListaPedidos);
         return ret;
-/*
-        if (pedidos == null || pedidos.isEmpty()) {
-            throw new RestauranteException("No hay pedidos nuevos.");
-        }
-
-        ArrayList<Pedido> pedidosNoDisponibles = new ArrayList<>();
-        boolean hayConfirmaciones = false;
-
-        for (Pedido p : pedidos) {
-            if (p.getEstado().equals(EstadoPedido.NOCONFIRMADO)) {
-                if (p.isDisponible()) {
-                   
-                    p.confirmarPedido();
-                    hayConfirmaciones = true;
-                } else {
-                    pedidosNoDisponibles.add(p);
-                }
-            }
-        }
-
-        if (!pedidosNoDisponibles.isEmpty()) {
-            StringBuilder mensaje = new StringBuilder("Nos hemos quedado sin stock de:\n");
-            for (Pedido p : pedidosNoDisponibles) {
-                mensaje.append("- ").append(p.getNombre()).append("\n");
-                pedidos.remove(p);
-            }
-            throw new RestauranteException(mensaje.toString());
-        }
-
-        if (!hayConfirmaciones) {
-            throw new RestauranteException("No se pudo confirmar ningún pedido.");
-        }*/
     }
     
     public String calcularPrecio(TipoCliente tc) {
         return tc.descuento(pedidos);
+    }
+    
+    @Override
+     public void agregarObservador(Observador obs){
+        if(!observadores.contains(obs)){
+            observadores.add(obs);
+        }
+    }
+    @Override
+    public void quitarObservador(Observador obs){
+        observadores.remove(obs);
+    }
+    @Override
+    public void avisar(Object evento){
+        ArrayList<Observador> copia = new ArrayList(observadores);
+        for(Observador obs:copia){
+            obs.actualizar(evento, this);
+        }
     }
 
 }

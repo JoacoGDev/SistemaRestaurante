@@ -81,6 +81,7 @@ public class Dispositivo {
         }
         TipoCliente tc = this.cliente.getTipoCliente();
         String ret = this.servicio.calcularPrecio(tc);
+        
         desvincularUsuario();
         return ret;
     }
