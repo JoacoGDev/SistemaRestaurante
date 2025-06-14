@@ -317,11 +317,7 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     private void ListaCategoriasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaCategoriasValueChanged
         // TODO add your handling code here:
         if (!evt.getValueIsAdjusting()) {
-            Categoria seleccion = (Categoria) ListaCategorias.getSelectedValue();
-            if (seleccion != null) {
-                cUsuario.cargarItems(seleccion.getNombre());
-            }
-
+            procesarCategoria();
         }
     }//GEN-LAST:event_ListaCategoriasValueChanged
  
@@ -437,6 +433,14 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
         jtPedidos.setModel(nuevoModelo);
 
+    }
+    
+    @Override
+    public void procesarCategoria() {
+        Categoria seleccion = (Categoria) ListaCategorias.getSelectedValue();
+        if (seleccion != null) {
+            cUsuario.cargarItems(seleccion.getNombre());
+        }
     }
 
 }

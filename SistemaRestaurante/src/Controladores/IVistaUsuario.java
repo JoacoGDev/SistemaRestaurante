@@ -29,6 +29,8 @@ public interface IVistaUsuario {
     public void mostrarConfirmar();
     
     public void limpiarCampos();
+    
+    public void procesarCategoria();
          
      
     

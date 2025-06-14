@@ -68,6 +68,7 @@ public class ControladorUsuarios implements Observador {
             String totalServ = dispUsu.finalizarServicio();
             vUsuario.mostrarConfirmar();
             vUsuario.mostrarMensaje(totalServ);
+            vUsuario.cargarItems(new ArrayList<Item>());
             
             
         }catch(RestauranteException ex){
@@ -109,7 +110,7 @@ public class ControladorUsuarios implements Observador {
          
     }
     
-     @Override
+    @Override
     public void actualizar(Object evento, Observable origen) {
         try{
             if(evento.equals(Servicio.eventos.cambioListaPedidos)){
