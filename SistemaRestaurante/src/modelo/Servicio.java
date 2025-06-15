@@ -43,6 +43,12 @@ public class Servicio extends Observable{
             if (p.getEstado().equals(EstadoPedido.enProceso)) {
                 throw new RestauranteException("Un poco tarde...Ya estamos elaborando este pedido");
             }
+            if(p.getEstado().equals(EstadoPedido.finalizado))  {
+                throw new RestauranteException("El pedido ya está finalizado");
+            }
+            if(p.getEstado().equals(EstadoPedido.entregado))  {
+                throw new RestauranteException("El pedido ya está entregado");
+            }
             p.reintegrarStock();
             pedidos.remove(ind);
             p.borrarPedidoUp();
