@@ -57,10 +57,16 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
         bFinalizarServicio = new javax.swing.JButton();
         jScrollPane4 = new javax.swing.JScrollPane();
         jtPedidos = new javax.swing.JTable();
+        jlMontoTotal = new javax.swing.JLabel();
         jScrollPane5 = new javax.swing.JScrollPane();
         MensajesSistema = new javax.swing.JTextPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Identificarse"));
 
@@ -109,6 +115,7 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Categorías"));
 
+        ListaCategorias.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         ListaCategorias.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 ListaCategoriasValueChanged(evt);
@@ -134,6 +141,7 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
         jLabel3.setText("Ítems");
 
+        listaItems.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane2.setViewportView(listaItems);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Comentario"));
@@ -198,6 +206,8 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
         ));
         jScrollPane4.setViewportView(jtPedidos);
 
+        jlMontoTotal.setText("Monto total:");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -212,6 +222,10 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
                         .addComponent(bFinalizarServicio)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlMontoTotal)
+                .addGap(49, 49, 49))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -220,9 +234,10 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(bConfirmarPedidos)
                     .addComponent(bFinalizarServicio))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jlMontoTotal))
         );
 
         jScrollPane5.setViewportView(MensajesSistema);
@@ -268,10 +283,9 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
                             .addComponent(bAgregarPedido)
                             .addComponent(bEliminarPedido))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14))
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -309,9 +323,8 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     private void bLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bLoginActionPerformed
         //NO SE SI ESTA BIEN O TENDRIAMOS QUE DIRECTAMENTE TOMAR UN INT
         String tfNum = tfNombreUsuario.getText();
-        int numU = Integer.parseInt(tfNum);
         String pass = new String(tfContrasena.getPassword());
-        cUsuario.loginUsuario(numU, pass);
+        cUsuario.loginUsuario(tfNum, pass);
     }//GEN-LAST:event_bLoginActionPerformed
 
     private void ListaCategoriasValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_ListaCategoriasValueChanged
@@ -335,8 +348,12 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
     private void bFinalizarServicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFinalizarServicioActionPerformed
          cUsuario.finalizarServicio();
-         limpiarCampos();
+         
     }//GEN-LAST:event_bFinalizarServicioActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        cUsuario.finalizarServicio();
+    }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JList ListaCategorias;
@@ -360,6 +377,7 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
+    private javax.swing.JLabel jlMontoTotal;
     private javax.swing.JTable jtPedidos;
     private javax.swing.JList listaItems;
     private javax.swing.JPasswordField tfContrasena;
@@ -400,10 +418,10 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
             Item i = p.getItems();
 
             m.addRow(new Object[] {
-                i != null ? i.getNombre() : "Sin item",
+                i.getNombre(),
                 p.getComentario() != null ? p.getComentario() : "Sin comentario",
-                p.getEstado() != null ? p.getEstado().toString() : "Sin estado",
-                (i != null && i.getUnidadProcesadora() != null) ? i.getUnidadProcesadora().getNombre() : "Sin unidad procesadora",
+                p.getNombrePedido(),
+                i.getUnidadProcesadora().getNombre(),
                 (p.getGestor() != null) ? p.getGestor().getNombre() : "Sin gestor",
                 (i != null) ? i.getPrecio() : 0.0
             });
@@ -433,6 +451,12 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
 
         jtPedidos.setModel(nuevoModelo);
 
+    }
+    
+    @Override
+    public void actualizarMonto(double precio){
+        String txt = String.valueOf(precio);
+        jlMontoTotal.setText("Monto total: " + txt);
     }
     
     @Override

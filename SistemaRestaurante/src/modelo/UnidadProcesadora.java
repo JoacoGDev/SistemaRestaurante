@@ -38,6 +38,11 @@ public class UnidadProcesadora extends Observable{
         pedidos.remove(p);
         avisar(eventos.cambioListaPedidosUp);
     }
+
+    @Override
+    public String toString() {
+        return nombre;
+    }
     
     
     

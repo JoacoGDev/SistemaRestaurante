@@ -99,6 +99,7 @@ public class VistaLoginGestor extends javax.swing.JFrame implements IVistaLoginG
         String usuario = (String)textUsuario.getText();
         String pass = new String(textContraseña.getPassword());
         cLoginGestores.loginGestor(usuario, pass);
+        this.dispose();
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

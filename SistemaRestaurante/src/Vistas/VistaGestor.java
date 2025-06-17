@@ -23,6 +23,8 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
     public VistaGestor(Gestor gestor) {
         initComponents();
         this.cGestor = new ControladorGestores(this, gestor);
+        setTitle("Procesar pedidos");
+        mostrarNombre(gestor);
     }
 
 
@@ -39,12 +41,13 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
         jTablaPedidos = new javax.swing.JTable();
         bFinalizarPedido = new javax.swing.JButton();
         bEntregarPedido = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        jlNombreGestor = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
+        jListaPedidos.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         jScrollPane1.setViewportView(jListaPedidos);
 
         bTomarPedido.setText("Tomar Pedido");
@@ -124,7 +127,7 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
                 .addGap(175, 175, 175))
         );
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jlNombreGestor.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -134,14 +137,14 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
             .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jlNombreGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(7, 7, 7)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jlNombreGestor, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -167,13 +170,13 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
     private javax.swing.JButton bEntregarPedido;
     private javax.swing.JButton bFinalizarPedido;
     private javax.swing.JButton bTomarPedido;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JList jListaPedidos;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTablaPedidos;
+    private javax.swing.JLabel jlNombreGestor;
     // End of variables declaration//GEN-END:variables
 
     @Override
@@ -183,21 +186,27 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
     
     @Override
     public void cargarTablaPedidos(ArrayList<Pedido> pedidos){
-        /*DefaultTableModel m = (DefaultTableModel) jtPedidos.getModel();
+        DefaultTableModel m = (DefaultTableModel) jTablaPedidos.getModel();
         m.setRowCount(0);
         for (Pedido p: pedidos){
             Item i = p.getItems();
 
             m.addRow(new Object[] {
-                i != null ? i.getNombre() : "Sin item",
-                p.getComentario() != null ? p.getComentario() : "Sin comentario",
-                p.getEstado() != null ? p.getEstado().toString() : "Sin estado",
-                (i != null && i.getUnidadProcesadora() != null) ? i.getUnidadProcesadora().getNombre() : "Sin unidad procesadora",
-                (p.getGestor() != null) ? p.getGestor().getNombre() : "Sin gestor",
-                (i != null) ? i.getPrecio() : 0.0
+                i.getNombre(),
+                p.getComentario(),
+                p.getCliente(),
+                p.getFecha(),
+                p.getNombrePedido()
+                
+                
             });
 
-        }*/
+        }
+    }
+    
+    public void mostrarNombre(Gestor gestor){
+        String titulo = "Gestor: " + gestor.getNombre() + " | Unidad Procesadora: " + gestor.getUp();
+        jlNombreGestor.setText(titulo);
     }
 
 

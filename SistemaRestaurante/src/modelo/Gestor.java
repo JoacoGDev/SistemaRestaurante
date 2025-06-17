@@ -3,6 +3,7 @@ package modelo;
 import Controladores.ControladorGestores;
 import java.util.ArrayList;
 
+
 public class Gestor extends Usuario{
 
 
@@ -33,7 +34,10 @@ public class Gestor extends Usuario{
     public UnidadProcesadora getUp() {
         return up;
     }
-    
+
+    public ArrayList<Pedido> getPedidosTomados() {
+        return pedidosTomados;
+    }
     
     public ArrayList<Pedido> obtenerPedidosUp(){
         return up.getPedidos();
@@ -43,9 +47,12 @@ public class Gestor extends Usuario{
         up.agregarObservador(aThis);
     }
 
-    public void tomarPedido(Pedido p) {
+    public void tomarPedido(Pedido p) throws RestauranteException{
         p.setGestor(this);
+        pedidosTomados.add(p);
+        p.procesarPedido();
     }
+    
     
     
 }

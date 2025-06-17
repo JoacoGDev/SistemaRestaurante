@@ -6,15 +6,20 @@ import observador.Observable;
 import observador.Observador;
 
 public class Servicio extends Observable{
+
     
-    public enum eventos{cambioListaPedidos};
+
+    public enum eventos{cambioListaPedidos, cambioPedido};
     
     private ArrayList<Observador> observadores = new ArrayList();
     private ArrayList<Pedido> pedidos = new ArrayList<>();
     private double montoTotal;
+    private Dispositivo disp;
+    
 
-    public Servicio() {
+    public Servicio(Dispositivo disp) {
         montoTotal = 0;
+        this.disp = disp;
     }
 
     public ArrayList<Pedido> getPedidos() {
@@ -24,15 +29,24 @@ public class Servicio extends Observable{
     public double getMontoTotal() {
         return montoTotal;
     }
+    
+    public Cliente getCliente() {
+        return disp.getCliente();
+    }
 
     public void setMontoTotal(double montoTotal) {
         this.montoTotal = montoTotal;
     }
     
+    public void modificarMontoTotal(double montoTotal) {
+        this.montoTotal += montoTotal;
+    }
+    
     public Pedido agregarNuevoPedido(Item item, String comentario)throws RestauranteException{
-        Pedido pedidoAAgregar = new Pedido(item, comentario);
+        Pedido pedidoAAgregar = new Pedido(item, comentario, this);
         pedidoAAgregar.validar();
         this.pedidos.add(pedidoAAgregar);
+        modificarMontoTotal(pedidoAAgregar.getPrecio());
         avisar(eventos.cambioListaPedidos);
         return pedidoAAgregar;
     }
@@ -40,19 +54,7 @@ public class Servicio extends Observable{
     public void borrarPedido(int ind) throws RestauranteException {
         if (ind != -1) {
             Pedido p = pedidos.get(ind);
-            if (p.getEstado().equals(EstadoPedido.enProceso)) {
-                throw new RestauranteException("Un poco tarde...Ya estamos elaborando este pedido");
-            }
-            if(p.getEstado().equals(EstadoPedido.finalizado))  {
-                throw new RestauranteException("El pedido ya está finalizado");
-            }
-            if(p.getEstado().equals(EstadoPedido.entregado))  {
-                throw new RestauranteException("El pedido ya está entregado");
-            }
-            p.reintegrarStock();
-            pedidos.remove(ind);
-            p.borrarPedidoUp();
-            avisar(eventos.cambioListaPedidos);
+            borrarPedido(p);
         }else{
             throw new RestauranteException("Debes seleccionar un pedido");
         }
@@ -101,9 +103,33 @@ public class Servicio extends Observable{
     }
     
     public String calcularPrecio(TipoCliente tc) {
-        return tc.descuento(pedidos);
+        ArrayList<Pedido> filtrados = new ArrayList<Pedido>();
+        for (Pedido p : pedidos){
+           if (p.filtrarACobrar()){
+               filtrados.add(p);
+           } 
+        }
+        return tc.descuento(filtrados);
     }
     
+    public void borrarPedidos() {
+        while(!pedidos.isEmpty()){
+            int i = 0;
+            Pedido p = pedidos.get(i);
+            borrarPedido(p);
+            i++;
+        }
+    }
     
-
+    public void borrarPedido(Pedido p) {
+        p.reintegrarStock();
+        pedidos.remove(p);
+        p.borrarPedidoUp();
+        modificarMontoTotal(p.getPrecio() * -1);
+        avisar(eventos.cambioListaPedidos);
+    }
+    
+    public void cambioPedido() {
+        avisar(eventos.cambioPedido);
+    }
 }

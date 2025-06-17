@@ -83,8 +83,8 @@ public class Dispositivo {
         }
         TipoCliente tc = this.cliente.getTipoCliente();
         String ret = this.servicio.calcularPrecio(tc);
+        servicio.borrarPedidos();
         
-        desvincularUsuario();
         return ret;
     }
 
@@ -99,6 +99,10 @@ public class Dispositivo {
 
     void setDisponible(boolean a) {
         disponible = a;
+    }
+    
+    public double getPrecio(){
+        return servicio.getMontoTotal();
     }
 
 }

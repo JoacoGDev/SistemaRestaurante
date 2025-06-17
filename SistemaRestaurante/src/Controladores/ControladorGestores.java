@@ -18,6 +18,7 @@ public class ControladorGestores implements Observador{
         vGestor = vistaGestor;
         gestor = gestorLogueado;
         gestor.agregarObs(this);
+        cargarPedidos();
     }
     
     public void cargarPedidos(){
@@ -25,7 +26,12 @@ public class ControladorGestores implements Observador{
     }
     
     public void tomarPedido(Pedido pedidoSeleccionado) {
-        gestor.tomarPedido(pedidoSeleccionado);
+        try{
+            gestor.tomarPedido(pedidoSeleccionado);
+            vGestor.cargarTablaPedidos(gestor.getPedidosTomados());
+        }
+        catch (RestauranteException ex){
+        }
     }
     
     @Override

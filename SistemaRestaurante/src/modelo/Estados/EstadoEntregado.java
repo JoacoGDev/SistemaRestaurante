@@ -15,7 +15,7 @@ import modelo.RestauranteException;
 public class EstadoEntregado extends EstadoPedidos{
 
        public EstadoEntregado(Pedido pedido) {
-        super(pedido, Pedido.EstadoPedido.entregado);
+        super(pedido, Pedido.EstadoPedido.entregado, "Entregado");
     }
      
 

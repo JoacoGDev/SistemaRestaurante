@@ -1,26 +1,29 @@
 package modelo;
 
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import modelo.Estados.EstadoNoConfirmado;
 import modelo.Estados.EstadoPedidos;
 
 public class Pedido {
+
     
-    public enum eventos {cambioPedido};
     
     public enum EstadoPedido {noConfirmado, confirmado, enProceso, finalizado, entregado};
 
-    
+    private String fecha = fechaAhora();
     private Item item;
     private String comentario;
     private EstadoPedidos estado;
     private Gestor gestor;
     private Servicio servicio;
    
-    public Pedido(Item item, String comentario) {
+    public Pedido(Item item, String comentario, Servicio ser) {
         this.item = item;
         this.comentario = comentario;
         this.estado = new EstadoNoConfirmado(this);
+        servicio = ser;
     }
 
     public EstadoPedido getEstado(){
@@ -29,6 +32,10 @@ public class Pedido {
     
     public Item getItems() {
         return item;
+    }
+
+    public String getFecha() {
+        return fecha;
     }
 
     public String getComentario() {
@@ -45,6 +52,7 @@ public class Pedido {
 
     public void procesarPedido() throws RestauranteException{
         this.estado.procesar();
+        borrarPedidoUp();
     }
     
     public void finalizarPedido() throws RestauranteException{
@@ -57,15 +65,20 @@ public class Pedido {
      
     public void cambiarEstado(EstadoPedidos estadoNuevo){
         this.estado = estadoNuevo;
+        this.servicio.cambioPedido();
     }
     
     public Gestor getGestor() {
         return gestor;
     }
+    
+    public Cliente getCliente(){
+        return servicio.getCliente();
+    }
 
     public void setGestor(Gestor gestor) {
         this.gestor = gestor;
-        this.servicio.avisar(eventos.cambioPedido);
+        this.servicio.cambioPedido();
     }
     
     public double getPrecio(){
@@ -112,7 +125,22 @@ public class Pedido {
         item.borrarPedidoUp(this);
     }
     
+    public String getNombrePedido(){
+        return estado.getNombre();
+    }
     
+    public String fechaAhora() {
+        LocalDateTime ahora = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm");
+        return ahora.format(myFormatObj);
+    }
+    
+    public boolean filtrarACobrar() {
+        if (this.getEstado() == EstadoPedido.noConfirmado || this.getEstado() == EstadoPedido.confirmado){
+            return false;
+        }
+        return true;
+    }
     
     
 }

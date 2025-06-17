@@ -15,7 +15,7 @@ import modelo.RestauranteException;
 public class EstadoNoConfirmado extends EstadoPedidos{
 
     public EstadoNoConfirmado(Pedido pedido) {
-        super(pedido, EstadoPedido.noConfirmado);
+        super(pedido, EstadoPedido.noConfirmado, "No confirmado");
     }
     
 

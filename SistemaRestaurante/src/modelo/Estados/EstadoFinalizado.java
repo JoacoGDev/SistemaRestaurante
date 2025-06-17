@@ -15,7 +15,7 @@ import modelo.RestauranteException;
 public class EstadoFinalizado extends EstadoPedidos{
 
     public EstadoFinalizado(Pedido pedido) {
-        super(pedido, Pedido.EstadoPedido.finalizado);
+        super(pedido, Pedido.EstadoPedido.finalizado, "Finalizado");
     }
 
     @Override

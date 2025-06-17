@@ -16,7 +16,7 @@ import modelo.RestauranteException;
 public class EstadoConfirmado extends EstadoPedidos{
 
      public EstadoConfirmado(Pedido pedido) {
-        super(pedido, Pedido.EstadoPedido.confirmado);
+        super(pedido, Pedido.EstadoPedido.confirmado, "Confirmado");
     }
 
    @Override

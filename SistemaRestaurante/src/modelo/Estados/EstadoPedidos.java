@@ -12,16 +12,23 @@ import modelo.RestauranteException;
     public abstract class EstadoPedidos {
         private Pedido pedido;
         private EstadoPedido estado;
+        private String nombre;
 
-        public EstadoPedidos(Pedido p, EstadoPedido estado) {
+        public EstadoPedidos(Pedido p, EstadoPedido estado, String nombre) {
             this.pedido = p;
             this.estado = estado;
+            this.nombre = nombre;
         }
 
         public EstadoPedido getEstado(){
             return estado;
         }
 
+        public String getNombre() {
+            return nombre;
+        }
+
+        
         public abstract void confirmar() throws RestauranteException;
 
         public abstract void procesar() throws RestauranteException;

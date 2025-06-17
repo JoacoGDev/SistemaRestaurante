@@ -58,7 +58,7 @@ public class SistemaUsuarios {
               throw new RestauranteException("Debe finalizar el servicio");
           }
           dispositivo.setCliente(usuarioCliente);
-          dispositivo.setServicio(new Servicio());
+          dispositivo.setServicio(new Servicio(dispositivo));
           usuarioCliente.setDispositivo(dispositivo);
 
           return usuarioCliente;

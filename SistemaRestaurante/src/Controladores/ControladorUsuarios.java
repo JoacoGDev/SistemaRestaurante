@@ -29,8 +29,12 @@ public class ControladorUsuarios implements Observador {
         this.dispUsu = f.getDispositivo();
     }
 
-    public void loginUsuario(int numeroCliente, String password){
+    public void loginUsuario(String cliente, String password){
         try{
+            if (cliente.isBlank() || cliente.isEmpty()){
+                throw new RestauranteException("Credenciales invalidas");
+            }
+            int numeroCliente = Integer.parseInt(cliente);
             Cliente clienteLogueado = f.loginCliente(numeroCliente, password, dispUsu);
             dispUsu.agregarObservador(this);
             vUsuario.MostrarUsuario(clienteLogueado.getNombreCompleto());
@@ -64,12 +68,16 @@ public class ControladorUsuarios implements Observador {
     
     public void finalizarServicio(){
         try{
-            dispUsu.quitarObservador(this);    
+            if (dispUsu.getCliente() == null){
+                throw new RestauranteException("Debes iniciar Sesión");
+            }
             String totalServ = dispUsu.finalizarServicio();
+            dispUsu.quitarObservador(this);    
+            dispUsu.desvincularUsuario();
             vUsuario.mostrarConfirmar();
             vUsuario.mostrarMensaje(totalServ);
             vUsuario.cargarItems(new ArrayList<Item>());
-            
+            vUsuario.limpiarCampos();
             
         }catch(RestauranteException ex){
             vUsuario.mostrarMensaje(ex.getMessage());
@@ -99,6 +107,7 @@ public class ControladorUsuarios implements Observador {
            vUsuario.mostrarMensaje(ex.getMessage());
        }
     }
+    
 
     public void confirmarServicio() {
         
@@ -115,6 +124,11 @@ public class ControladorUsuarios implements Observador {
         try{
             if(evento.equals(Servicio.eventos.cambioListaPedidos)){
                 vUsuario.actualizarTabla(dispUsu.getPedidos());
+                vUsuario.actualizarMonto(dispUsu.getPrecio());
+            }
+            if(evento.equals(Servicio.eventos.cambioPedido)){
+                vUsuario.actualizarTabla(dispUsu.getPedidos());
+                vUsuario.actualizarMonto(dispUsu.getPrecio());
             }
         }
         catch (RestauranteException ex){

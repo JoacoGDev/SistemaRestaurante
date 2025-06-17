@@ -75,7 +75,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return nombre;
+        return nombre + " - " + precio;
     }
 
     public void reintegrarStock() {
@@ -111,23 +111,5 @@ public class Item {
     void borrarPedidoUp(Pedido p) {
         unidadProcesadora.borrarPedido(p);
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Item other = (Item) obj;
-        return this.id == other.id;
-    }
-    
-    
-    
 
 }

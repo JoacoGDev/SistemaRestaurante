@@ -38,4 +38,11 @@ public class Cliente extends Usuario {
     public Dispositivo getDispositivo(){
         return dispositivo;
     }
+
+    @Override
+    public String toString() {
+        return super.getNombreCompleto();
+    }
+    
+    
 }

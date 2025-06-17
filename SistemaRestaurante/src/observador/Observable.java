@@ -14,7 +14,6 @@ public class Observable {
     public void agregarObservador(Observador obs){
         if(!observadores.contains(obs)){
             observadores.add(obs);
-            System.out.println("Observador agregado: " + obs);
         }
     }
     public void quitarObservador(Observador obs){
@@ -24,7 +23,6 @@ public class Observable {
         ArrayList<Observador> copia = new ArrayList(observadores);
         for(Observador obs:copia){
             obs.actualizar(evento, this);
-            System.out.println("Entro en " + obs);
         }
     }
 }

@@ -31,6 +31,8 @@ public interface IVistaUsuario {
     public void limpiarCampos();
     
     public void procesarCategoria();
+
+    public void actualizarMonto(double precio);
          
      
     

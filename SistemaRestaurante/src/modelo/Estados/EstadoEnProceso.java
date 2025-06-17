@@ -15,7 +15,7 @@ import modelo.RestauranteException;
 public class EstadoEnProceso extends EstadoPedidos{
 
      public EstadoEnProceso(Pedido pedido) {
-        super(pedido, Pedido.EstadoPedido.enProceso);
+        super(pedido, Pedido.EstadoPedido.enProceso, "En proceso");
     }
      
      
