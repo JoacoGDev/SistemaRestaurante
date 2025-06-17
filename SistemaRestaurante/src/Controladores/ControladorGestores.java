@@ -41,5 +41,25 @@ public class ControladorGestores implements Observador{
         }
     }
 
+    public void finalizarPedido(int ind) {
+        try{
+            gestor.finalizarPedido(ind);
+             vGestor.cargarTablaPedidos(gestor.getPedidosTomados());
+            
+        }catch(RestauranteException ex){
+            
+        }
+    }
+
+    public void entregarPedido(int ind) {
+         try{
+            gestor.entregarPedido(ind);
+             vGestor.cargarTablaPedidos(gestor.getPedidosTomados());
+            
+        }catch(RestauranteException ex){
+            
+        }
+    }
+
     
 }

@@ -48,9 +48,24 @@ public class Gestor extends Usuario{
     }
 
     public void tomarPedido(Pedido p) throws RestauranteException{
-        p.setGestor(this);
-        pedidosTomados.add(p);
-        p.procesarPedido();
+        if(p == null){
+            throw new RestauranteException("No hay pedido seleccionado");
+        }
+            p.setGestor(this);
+            pedidosTomados.add(p);
+            p.procesarPedido();
+    }
+
+    public void finalizarPedido(int ind) throws RestauranteException {
+        if(ind < 0) throw new RestauranteException("");
+        Pedido pedidoAFinalizar = pedidosTomados.get(ind);
+        pedidoAFinalizar.finalizarPedido();
+    }
+    
+      public void entregarPedido(int ind) throws RestauranteException {
+        if(ind < 0) throw new RestauranteException("");
+        Pedido pedidoAEntregar = pedidosTomados.get(ind);
+        pedidoAEntregar.entregarPedido();
     }
     
     

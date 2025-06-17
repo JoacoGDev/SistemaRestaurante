@@ -221,6 +221,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Entregar Pedido"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="bEntregarPedidoActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

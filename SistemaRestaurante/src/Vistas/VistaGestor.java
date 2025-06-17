@@ -99,6 +99,11 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
         });
 
         bEntregarPedido.setText("Entregar Pedido");
+        bEntregarPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bEntregarPedidoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -162,8 +167,13 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
 
     private void bFinalizarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bFinalizarPedidoActionPerformed
         int ind = jTablaPedidos.getSelectedRow();
-        //cGestor.finalizarPedido(ind);     
+        cGestor.finalizarPedido(ind);     
     }//GEN-LAST:event_bFinalizarPedidoActionPerformed
+
+    private void bEntregarPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bEntregarPedidoActionPerformed
+        int ind = jTablaPedidos.getSelectedRow();
+        cGestor.entregarPedido(ind);  
+    }//GEN-LAST:event_bEntregarPedidoActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
