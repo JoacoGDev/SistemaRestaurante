@@ -50,6 +50,8 @@ public class DatosPrueba {
             
             f.agregarDispositivo();
             f.agregarDispositivo();
+            f.agregarDispositivo();
+            f.agregarDispositivo();
             
    
             f.agregarUp("Bar");
@@ -263,9 +265,8 @@ public class DatosPrueba {
 
             
             f.agregarGestores("Juan Carlos", "1", "1", f.obtenerUp("Cocina"));
-            f.agregarGestores("Pedro Pascal", "Pedrito", "PedroPedrin", f.obtenerUp("Cocina"));
-            f.agregarGestores("Carlo", "ElCarli", "Carlangas", f.obtenerUp("Cocina"));
-            f.agregarGestores("Agustin", "Agustin51", "ElFornais", f.obtenerUp("Cocina"));
+            f.agregarGestores("Pedro Pascal", "2", "2", f.obtenerUp("Bar"));
+            f.agregarGestores("Carlo", "3", "3", f.obtenerUp("Cafeteria"));
             
 
 

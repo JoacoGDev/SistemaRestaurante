@@ -9,7 +9,7 @@ public class Servicio extends Observable{
 
     
 
-    public enum eventos{cambioListaPedidos, cambioPedido};
+    public enum eventos{cambioListaPedidos, cambioPedido, pedidoParaEntregar};
     
     private ArrayList<Observador> observadores = new ArrayList();
     private ArrayList<Pedido> pedidos = new ArrayList<>();
@@ -104,12 +104,28 @@ public class Servicio extends Observable{
     
     public String calcularPrecio(TipoCliente tc) {
         ArrayList<Pedido> filtrados = new ArrayList<Pedido>();
+        boolean noConfirmados = false;
+        int contador = 0;
+        //noEstaEntregado  tieneNoConfirmados
         for (Pedido p : pedidos){
-           if (p.filtrarACobrar()){
+            if (!noConfirmados && p.tieneNoConfirmados()){
+               noConfirmados = true;
+            }
+            if (p.noEstaEntregado()){
+               contador++;
+            }
+            if (!p.noEstaEntregado()){
                filtrados.add(p);
-           } 
+            } 
         }
-        return tc.descuento(filtrados);
+        String ret = "Factura: " + tc.descuento(filtrados);
+        if(noConfirmados){
+            ret += "\nTienes pedidos sin confirmar!";
+        }
+        if (contador >0){
+            ret += "\n¡Tienes  "+ contador + " pedidos en proceso, recuerda ir a retirarlos!";
+        }
+        return ret;
     }
     
     public void borrarPedidos() {
@@ -131,5 +147,9 @@ public class Servicio extends Observable{
     
     public void cambioPedido() {
         avisar(eventos.cambioPedido);
+    }
+    
+    public void pedidoParaEntregar() {
+        avisar(eventos.pedidoParaEntregar);
     }
 }

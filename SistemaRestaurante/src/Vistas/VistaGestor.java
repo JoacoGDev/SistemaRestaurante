@@ -7,6 +7,7 @@ package Vistas;
 import Controladores.ControladorGestores;
 import Controladores.IVistaGestor;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import modelo.Gestor;
 import modelo.Item;
@@ -25,6 +26,7 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
         this.cGestor = new ControladorGestores(this, gestor);
         setTitle("Procesar pedidos");
         mostrarNombre(gestor);
+        setLocationRelativeTo(null);
     }
 
 
@@ -43,7 +45,12 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
         bEntregarPedido = new javax.swing.JButton();
         jlNombreGestor = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 
@@ -175,6 +182,17 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
         cGestor.entregarPedido(ind);  
     }//GEN-LAST:event_bEntregarPedidoActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        if(cGestor.puedeCerrar()){
+            cGestor.cerrar();
+            this.dispose();
+        }
+        else
+        {
+            mostrarError("Tienes pedidos sin terminar");
+        }
+    }//GEN-LAST:event_formWindowClosing
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton bEntregarPedido;
@@ -217,6 +235,11 @@ public class VistaGestor extends javax.swing.JFrame implements IVistaGestor {
     public void mostrarNombre(Gestor gestor){
         String titulo = "Gestor: " + gestor.getNombre() + " | Unidad Procesadora: " + gestor.getUp();
         jlNombreGestor.setText(titulo);
+    }
+    
+    @Override
+    public void mostrarError(String error){
+        JOptionPane.showMessageDialog(this, error, "Error", JOptionPane.ERROR_MESSAGE);
     }
 
 

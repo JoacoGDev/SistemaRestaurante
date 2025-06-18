@@ -36,7 +36,7 @@ public class ControladorUsuarios implements Observador {
             }
             int numeroCliente = Integer.parseInt(cliente);
             Cliente clienteLogueado = f.loginCliente(numeroCliente, password, dispUsu);
-            dispUsu.agregarObservador(this);
+            dispUsu.getServicio().agregarObservador(this);
             vUsuario.MostrarUsuario(clienteLogueado.getNombreCompleto());
             vUsuario.mostrarMensaje("Mensajes de Sistema");
          
@@ -72,7 +72,7 @@ public class ControladorUsuarios implements Observador {
                 throw new RestauranteException("Debes iniciar Sesión");
             }
             String totalServ = dispUsu.finalizarServicio();
-            dispUsu.quitarObservador(this);    
+            dispUsu.getServicio().quitarObservador(this);    
             dispUsu.desvincularUsuario();
             vUsuario.mostrarConfirmar();
             vUsuario.mostrarMensaje(totalServ);
@@ -119,6 +119,10 @@ public class ControladorUsuarios implements Observador {
          
     }
     
+    public boolean hayServicio(){
+        return dispUsu.tieneCliente();
+    }
+    
     @Override
     public void actualizar(Object evento, Observable origen) {
         try{
@@ -130,10 +134,14 @@ public class ControladorUsuarios implements Observador {
                 vUsuario.actualizarTabla(dispUsu.getPedidos());
                 vUsuario.actualizarMonto(dispUsu.getPrecio());
             }
+            if(evento.equals(Servicio.eventos.pedidoParaEntregar)){
+                vUsuario.mostrarMensaje("Uno de sus pedidos fue finalizado");
+            }
         }
         catch (RestauranteException ex){
             vUsuario.mostrarMensaje(ex.getMessage());
         }
     }
+    
 
 }

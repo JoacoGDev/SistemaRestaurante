@@ -17,7 +17,7 @@ public class VistaLoginGestor extends javax.swing.JFrame implements IVistaLoginG
 
     public VistaLoginGestor() {
         initComponents();
-        
+        setLocationRelativeTo(null);
     }
 
 
@@ -99,7 +99,7 @@ public class VistaLoginGestor extends javax.swing.JFrame implements IVistaLoginG
         String usuario = (String)textUsuario.getText();
         String pass = new String(textContraseña.getPassword());
         cLoginGestores.loginGestor(usuario, pass);
-        this.dispose();
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -123,5 +123,6 @@ public class VistaLoginGestor extends javax.swing.JFrame implements IVistaLoginG
     @Override
     public void mostrarVistaGestor(Gestor g) {
         new VistaGestor(g).setVisible(true);
+        this.dispose();
     }
 }

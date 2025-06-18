@@ -57,6 +57,7 @@ public class Pedido {
     
     public void finalizarPedido() throws RestauranteException{
         this.estado.finalizar();
+        this.servicio.pedidoParaEntregar();
     }
     
     public void entregarPedido() throws RestauranteException{
@@ -135,11 +136,12 @@ public class Pedido {
         return ahora.format(myFormatObj);
     }
     
-    public boolean filtrarACobrar() {
-        if (this.getEstado() == EstadoPedido.noConfirmado || this.getEstado() == EstadoPedido.confirmado){
-            return false;
-        }
-        return true;
+    public boolean tieneNoConfirmados() {
+        return this.getEstado() == EstadoPedido.noConfirmado;
+    }
+    
+    public boolean noEstaEntregado() {
+        return this.getEstado() != EstadoPedido.entregado && !tieneNoConfirmados();
     }
     
     

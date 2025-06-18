@@ -1,6 +1,5 @@
 package modelo;
 
-import Controladores.ControladorUsuarios;
 import java.util.ArrayList;
 
 public class Dispositivo {
@@ -25,8 +24,11 @@ public class Dispositivo {
         return cliente;
     }
     
+    public boolean tieneCliente(){
+        return cliente != null;
+    }
     
-     public boolean isDisponible() {
+    public boolean isDisponible() {
         return disponible;
     }
 
@@ -88,14 +90,7 @@ public class Dispositivo {
         return ret;
     }
 
-    public void agregarObservador(ControladorUsuarios aThis) {
-        servicio.agregarObservador(aThis);
-    }
-
-
-    public void quitarObservador(ControladorUsuarios aThis) {
-        servicio.quitarObservador(aThis);
-    }
+  
 
     void setDisponible(boolean a) {
         disponible = a;

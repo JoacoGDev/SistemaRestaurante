@@ -17,7 +17,7 @@ public class ControladorGestores implements Observador{
     public ControladorGestores(IVistaGestor vistaGestor, Gestor gestorLogueado){
         vGestor = vistaGestor;
         gestor = gestorLogueado;
-        gestor.agregarObs(this);
+        gestor.getUp().agregarObservador(this);
         cargarPedidos();
     }
     
@@ -31,6 +31,7 @@ public class ControladorGestores implements Observador{
             vGestor.cargarTablaPedidos(gestor.getPedidosTomados());
         }
         catch (RestauranteException ex){
+            vGestor.mostrarError(ex.getMessage());
         }
     }
     
@@ -44,21 +45,30 @@ public class ControladorGestores implements Observador{
     public void finalizarPedido(int ind) {
         try{
             gestor.finalizarPedido(ind);
-             vGestor.cargarTablaPedidos(gestor.getPedidosTomados());
+            vGestor.cargarTablaPedidos(gestor.getPedidosTomados());
             
         }catch(RestauranteException ex){
-            
+            vGestor.mostrarError(ex.getMessage());
         }
     }
 
     public void entregarPedido(int ind) {
          try{
             gestor.entregarPedido(ind);
-             vGestor.cargarTablaPedidos(gestor.getPedidosTomados());
+            vGestor.cargarTablaPedidos(gestor.getPedidosTomados());
             
         }catch(RestauranteException ex){
-            
+            vGestor.mostrarError(ex.getMessage());
         }
+    }
+
+    public boolean puedeCerrar() {
+        return gestor.puedeCerrar();
+    }
+
+    public void cerrar() {
+        gestor.salir();
+        
     }
 
     

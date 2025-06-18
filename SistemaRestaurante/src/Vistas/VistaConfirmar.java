@@ -16,6 +16,7 @@ public class VistaConfirmar extends javax.swing.JDialog {
     public VistaConfirmar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(parent);
     }
 
     /**

@@ -1,6 +1,5 @@
 package modelo;
 
-import Controladores.ControladorGestores;
 import java.util.ArrayList;
 
 
@@ -43,10 +42,6 @@ public class Gestor extends Usuario{
         return up.getPedidos();
     }
 
-    public void agregarObs(ControladorGestores aThis) {
-        up.agregarObservador(aThis);
-    }
-
     public void tomarPedido(Pedido p) throws RestauranteException{
         if(p == null){
             throw new RestauranteException("No hay pedido seleccionado");
@@ -57,15 +52,33 @@ public class Gestor extends Usuario{
     }
 
     public void finalizarPedido(int ind) throws RestauranteException {
-        if(ind < 0) throw new RestauranteException("");
+        if(ind < 0) throw new RestauranteException("No hay pedido seleccionado");
         Pedido pedidoAFinalizar = pedidosTomados.get(ind);
         pedidoAFinalizar.finalizarPedido();
     }
     
       public void entregarPedido(int ind) throws RestauranteException {
-        if(ind < 0) throw new RestauranteException("");
+        if(ind < 0) throw new RestauranteException("No hay pedido seleccionado");
         Pedido pedidoAEntregar = pedidosTomados.get(ind);
         pedidoAEntregar.entregarPedido();
+    }
+
+    public boolean puedeCerrar() {
+        boolean flag = true;
+        int i = 0;
+        while (i < pedidosTomados.size() && flag){
+            if (pedidosTomados.get(i).noEstaEntregado()){
+                flag = false;
+            }
+            i++;
+        }
+        return flag;
+    }
+
+    public void salir() {
+        activo = false;
+        pedidosTomados.clear();
+        
     }
     
     

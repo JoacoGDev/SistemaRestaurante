@@ -15,5 +15,5 @@ public interface IVistaGestor {
     
     public void cargarPedidos(ArrayList<Pedido> pedidos);
     public void cargarTablaPedidos(ArrayList<Pedido> pedidos);
-    
+    public void mostrarError(String error);
 }
