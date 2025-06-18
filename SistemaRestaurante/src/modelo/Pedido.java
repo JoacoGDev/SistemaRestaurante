@@ -88,11 +88,11 @@ public class Pedido {
     public String getNombre(){
         return this.item.getNombre();
     }
-    
+
     @Override
     public String toString() {
-        return item.getNombre() + comentario;
-}
+        return item.getNombre() + (comentario != null && !comentario.isEmpty() ? " (" + comentario + ")" : "");
+    }
 
     public boolean isDisponible() {
         return this.item.isDisponible();

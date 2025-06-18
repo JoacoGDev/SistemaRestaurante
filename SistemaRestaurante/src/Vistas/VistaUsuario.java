@@ -445,8 +445,8 @@ public class VistaUsuario extends javax.swing.JFrame implements IVistaUsuario {
         setTitle("");
 
         DefaultTableModel nuevoModelo = new DefaultTableModel(
-                new Object[][]{}, // sin filas
-                new String[]{"Producto", "Cantidad", "Precio"} // tus columnas
+                new Object[][]{}, 
+                new String[]{"Item","Comentario", "Estado", "Unidad", "Gestor", "Precio"} 
         );
 
         jtPedidos.setModel(nuevoModelo);
