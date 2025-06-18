@@ -141,7 +141,7 @@ public class Pedido {
     }
     
     public boolean noEstaEntregado() {
-        return this.getEstado() != EstadoPedido.entregado && !tieneNoConfirmados();
+        return this.getEstado() != EstadoPedido.entregado;
     }
     
     

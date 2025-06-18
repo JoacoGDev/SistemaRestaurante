@@ -111,10 +111,10 @@ public class Servicio extends Observable{
             if (!noConfirmados && p.tieneNoConfirmados()){
                noConfirmados = true;
             }
-            if (p.noEstaEntregado()){
+            else if (p.noEstaEntregado()){
                contador++;
             }
-            if (!p.noEstaEntregado()){
+            else if (!p.noEstaEntregado()){
                filtrados.add(p);
             } 
         }
