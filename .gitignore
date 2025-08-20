@@ -1,2 +1,15 @@
-/SistemaRestaurante/nbproject/private/
-/SistemaRestaurante/build/
+# Archivos y carpetas de IntelliJ IDEA
+.idea/
+*.iml
+
+# Archivos de compilación de Java
+*.class
+/out/
+/build/
+
+# Archivos del sistema
+.DS_Store
+Thumbs.db
+
+# Archivos de logs
+*.log
