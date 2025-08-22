@@ -27,7 +27,7 @@ Permite gestionar productos, pedidos y clientes de forma intuitiva, enfocándose
 ## Tecnologías utilizadas
 
 - **Lenguaje:** Java
-- **Patrones de diseño:** MVC, Observador
+- **Patrones de diseño:** MVC, Observador, Fachada, State, Strategy
 - **Interfaz gráfica:** Swing (JFrame)
 - **Manejo de datos:** Colecciones de Java
 
