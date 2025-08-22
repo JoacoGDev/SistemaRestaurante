@@ -2,7 +2,7 @@
 
 **Proyecto académico de la materia: Diseño y Desarrollo de Aplicaciones**  
 **Facultad ORT - Facultad de Ingeniería, Montevideo, Uruguay**  
-**Colaboradores:** [Joaquín Pardiñas](https://github.com/UsuarioPardinas), [Joaquín Gil](https://github.com/JoacoGDev)
+**Colaboradores:** [Joaquín Pardiñas](https://github.com/JoaquinP711), [Joaquín Gil](https://github.com/JoacoGDev)
 
 
 ---
